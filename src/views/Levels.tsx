@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import {
+    Dimensions,
+    ScrollView,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../components/Level/Header';
 import LevelBox from '../components/Level/LevelBox';
@@ -95,6 +100,23 @@ const levelData = [
             locked: true,
         },
     ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: true,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: true,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: true,
+        },
+    ],
 ];
 
 const Levels: React.FC<NavProps<'Levels'>> = ({ navigation }) => {
@@ -107,11 +129,12 @@ const Levels: React.FC<NavProps<'Levels'>> = ({ navigation }) => {
     return (
         <SafeAreaView>
             <Header goBack={navigation.goBack} />
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 {levelData.map((data, dex) => (
                     <View key={`level-row-${dex + 1}`} style={styles.row}>
                         {data.map((level, dex) => (
-                            <TouchableWithoutFeedback
+                            <TouchableOpacity
+                                activeOpacity={0.6}
                                 key={`level-${dex + 1}`}
                                 onPress={() => {
                                     if (level.locked) {
@@ -124,11 +147,11 @@ const Levels: React.FC<NavProps<'Levels'>> = ({ navigation }) => {
                                 }}
                             >
                                 <LevelBox level={level} />
-                            </TouchableWithoutFeedback>
+                            </TouchableOpacity>
                         ))}
                     </View>
                 ))}
-            </View>
+            </ScrollView>
             <LockedOverlay toggleOverlay={toggleOverlay} visible={visible} />
         </SafeAreaView>
     );
@@ -137,10 +160,10 @@ const Levels: React.FC<NavProps<'Levels'>> = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#E5E5E5',
-        height: height - height / 14,
+        height: height * 0.9,
     },
     row: {
-        marginVertical: 14,
+        marginVertical: 15,
         display: 'flex',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
