@@ -248,8 +248,8 @@ export const problems: IProblem[] = [
         validation: [
             'start',
             'input-arr',
-            'init-n',
-            'init-sum',
+            'init-n-len-arr',
+            'init-sum-0',
             'loop-i-0-n',
             'add-i-to-sum',
             'divide-sum-by-n',
