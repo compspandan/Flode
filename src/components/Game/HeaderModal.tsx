@@ -1,0 +1,173 @@
+import React,{useState} from "react";
+import { TouchableOpacity, Text, Modal, View, Dimensions, StyleSheet } from "react-native";
+import { BlurView } from 'expo-blur';
+import Animated from 'react-native-reanimated';
+import {
+    AntDesign,
+    Feather,
+} from '@expo/vector-icons';
+import { StackNavigationProp } from "@react-navigation/stack";
+import { ParamList } from "../../ParamList";
+import { positionInterface } from "../FlowChart/config";
+
+const { height: WINDOW_HEIGHT, width: WINDOW_WIDTH } = Dimensions.get('window');
+
+interface headerModalProps{
+    level:number;
+    navigation: StackNavigationProp<ParamList, "Game">;
+    position: Animated.SharedValue<positionInterface>;
+    validation: string[];
+}
+
+const HeaderModal:React.FC<headerModalProps>=({level,navigation,position,validation})=>{
+
+    const [flag, Setflag] = useState(false);
+    const [opac, Setopac] = useState(1);
+    const [modalVisible, SetmodalVisible] = useState(false);
+    const [butname, Setbutname] = useState(1);
+    const [gamelvl, Setgamelvl] = useState(level);
+    const validate = () => {
+        Setflag(true);
+        Setbutname(0);
+        for (var i = 0; i < validation.length; i++) {
+            if (i != position.value[validation[i]]) {
+                Setflag(false);
+                Setbutname(1);
+            }
+        }
+        SetmodalVisible(true);
+    };
+
+    return <>
+        <TouchableOpacity style={styles.button1} onPress={validate}>
+                <Text style={{ color: 'white' }}>Submit</Text>
+            </TouchableOpacity>
+            <Modal
+                animationType="none"
+                transparent={true}
+                visible={modalVisible}
+            >
+                <BlurView intensity={100 * opac}>
+                    <View
+                        style={[
+                            styles.popup,
+                            {
+                                opacity: opac,
+                                borderRadius: 20,
+                                display: 'flex',
+                            },
+                        ]}
+                    >
+                        <Text
+                            style={{
+                                color: 'white',
+                                textAlign: 'center',
+                                fontSize: 40,
+                                marginTop: WINDOW_HEIGHT / 11,
+                                fontFamily: 'Ubuntu_500Medium',
+                                fontWeight: 'bold',
+                            }}
+                        >
+                            {flag ? 'Level Cleared!!' : 'Wrong Answer'}
+                        </Text>
+                        <View
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                marginTop: WINDOW_HEIGHT / 9,
+                            }}
+                        >
+                            <TouchableOpacity
+                                onPress={() => {
+                                    Setopac(0), navigation.pop();
+                                }}
+                                style={[
+                                    styles.popupbuttons,
+                                    {
+                                        margin: 20,
+                                        marginLeft: WINDOW_WIDTH / 8,
+                                        marginRight: WINDOW_WIDTH / 8,
+                                    },
+                                ]}
+                            >
+                                <Feather
+                                    name="list"
+                                    size={60}
+                                    color="white"
+                                    style={{ textAlign: 'center', margin: 5 }}
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    butname
+                                        ? SetmodalVisible(false)
+                                        :navigation.replace("Game",{level:level+1});SetmodalVisible(false);
+                                }}
+                                style={[
+                                    styles.popupbuttons,
+                                    {
+                                        margin: 20,
+                                        marginRight: WINDOW_WIDTH / 8,
+                                    },
+                                ]}
+                            >
+                                <AntDesign
+                                    name={butname ? 'reload1' : 'caretright'}
+                                    size={62}
+                                    color="white"
+                                    style={{ textAlign: 'center', margin: 6 }}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </BlurView>
+            </Modal>
+    </>
+
+}
+
+const styles = StyleSheet.create({
+    button1: {
+        height: 50,
+        width: 75,
+        position: 'absolute',
+        left: WINDOW_WIDTH / 1.25,
+        top: WINDOW_HEIGHT / 14,
+        borderRadius: 14,
+        borderWidth: 2,
+        borderColor: '#e94560',
+        backgroundColor: '#e94560',
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+    textContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    popup: {
+        backgroundColor: '#16213E',
+        width: WINDOW_WIDTH / 1.32,
+        height: WINDOW_HEIGHT / 2,
+        marginTop: WINDOW_HEIGHT / 4.3,
+        marginBottom: WINDOW_HEIGHT / 4.3,
+        marginLeft: WINDOW_WIDTH / 8,
+    },
+    popupbuttons: {
+        width: 80,
+        height: 80,
+        alignItems: 'center',
+        borderRadius: 18,
+        borderWidth: 2,
+        textAlign: 'center',
+        backgroundColor: '#e94560',
+        borderColor: '#e94560',
+    }
+})
+
+export default HeaderModal;

@@ -1,29 +1,28 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import { colors } from '../FlowChart/config';
+import { Block, colors } from '../FlowChart/config';
 
 interface CardProps {
     title: string;
     desc: string;
-    cardHeight: number;
+    blockType: keyof Block;
 }
 
-const { width: WINDOW_WIDTH } = Dimensions.get('window');
-const CARD_WIDTH = WINDOW_WIDTH * 0.8;
+const { height: WINDOW_HEIGHT, width: WINDOW_WIDTH } = Dimensions.get('window');
+const CARD_WIDTH = WINDOW_WIDTH * 0.9;
 
-const Card: React.FC<CardProps> = ({ title, desc, cardHeight }) => {
+const Card: React.FC<CardProps> = ({ title, desc, blockType }) => {
     return (
-        <View>
+        <View style={{ height: WINDOW_HEIGHT * 0.85 }}>
             <LinearGradient
-                style={[
-                    styles.center,
-                    { height: cardHeight, width: CARD_WIDTH },
-                ]}
-                colors={colors.cond}
+                style={[styles.center, { width: CARD_WIDTH }]}
+                colors={colors[blockType]}
             >
-                <Text style={[styles.text, styles.title]}>{title}</Text>
-                <Text style={[styles.text, styles.desc]}>{desc}</Text>
+                <View style={styles.textBox}>
+                    <Text style={[styles.text, styles.title]}>{title}</Text>
+                    <Text style={[styles.text, styles.desc]}>{desc}</Text>
+                </View>
             </LinearGradient>
         </View>
     );
@@ -34,13 +33,17 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         margin: 20,
+        borderRadius: 5,
+    },
+    textBox: {
+        margin: 15,
     },
     text: {
         color: '#FFF',
-        textAlign: 'center',
     },
     title: {
-        fontSize: 40,
+        fontSize: 25,
+        fontWeight: '700',
     },
     desc: {
         fontSize: 20,

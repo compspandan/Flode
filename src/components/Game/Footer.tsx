@@ -1,7 +1,15 @@
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, AntDesign } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import {
+    Dimensions,
+    ScrollView,
+    StyleSheet,
+    View,
+    SafeAreaView,
+    TouchableWithoutFeedback,
+} from 'react-native';
+import { PanGestureHandler, TouchableNativeFeedback } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import { usePanGestureHandler, withSpring } from 'react-native-redash/src/v1';
 import FooterIcon from './FooterIcon';
@@ -17,10 +25,11 @@ const CARD_VIEW_HEIGHT = HEIGHT - FOOTER_HEIGHT;
 export const TOTAL_FOOTER_HEIGHT = FOOTER_HEIGHT + FLOATING_SWIPE_UP_BAR_WIDTH;
 
 interface FooterProps {
-    onCircleLongPress(x:keyof Block):void
+    onCircleLongPress(x: keyof Block): void;
+    deleteLastCB():void;
 }
 
-const Footer: React.FC<FooterProps> = ({ onCircleLongPress }) => {
+const Footer: React.FC<FooterProps> = ({ onCircleLongPress, deleteLastCB }) => {
     const {
         gestureHandler,
         state,
@@ -41,7 +50,10 @@ const Footer: React.FC<FooterProps> = ({ onCircleLongPress }) => {
         state,
         velocity: velocity.y,
         value: translation.y,
-        snapPoints: [0, TOTAL_FOOTER_HEIGHT - HEIGHT],
+        snapPoints: [
+            0,
+            TOTAL_FOOTER_HEIGHT - HEIGHT + FLOATING_SWIPE_UP_BAR_WIDTH,
+        ],
         config,
     });
 
@@ -61,12 +73,14 @@ const Footer: React.FC<FooterProps> = ({ onCircleLongPress }) => {
                     {footerIcons.map(({ blockType }, key) => (
                         <FooterIcon
                             key={key}
+                            // @ts-ignore
                             blockType={blockType}
                             onCircleLongPress={onCircleLongPress}
                         />
                     ))}
                 </ScrollView>
-                <View style={styles.trashBox}>
+                <TouchableNativeFeedback onPress={deleteLastCB}>
+                <View style={styles.trashBox} >
                     <Entypo
                         name="trash"
                         size={24}
@@ -74,8 +88,12 @@ const Footer: React.FC<FooterProps> = ({ onCircleLongPress }) => {
                         style={styles.trash}
                     />
                 </View>
+                </TouchableNativeFeedback>
             </Animated.View>
-            <CardDataView translateY={translateY} cardViewHeight={CARD_VIEW_HEIGHT} />
+            <CardDataView
+                translateY={translateY}
+                cardViewHeight={CARD_VIEW_HEIGHT}
+            />
         </View>
     );
 };
