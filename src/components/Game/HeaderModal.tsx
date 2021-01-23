@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#16213E',
         width: WINDOW_WIDTH / 1.32,
         height: WINDOW_HEIGHT / 2,
-        marginTop: WINDOW_HEIGHT / 4.3,
-        marginBottom: WINDOW_HEIGHT / 4.3,
+        marginTop: WINDOW_HEIGHT / 4.2,
+        marginBottom: WINDOW_HEIGHT / 3.8,
         marginLeft: WINDOW_WIDTH / 8,
     },
     popupbuttons: {
