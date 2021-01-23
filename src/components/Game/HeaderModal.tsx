@@ -51,6 +51,9 @@ const HeaderModal: React.FC<headerModalProps> = ({
             <TouchableOpacity style={styles.button1} onPress={validate}>
                 <Text style={{ color: 'white' }}>Submit</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.button2} onPress={validate}>
+                <Text style={{ color: 'white' }}>Help</Text>
+            </TouchableOpacity>
             <Modal
                 animationType="none"
                 transparent={true}
@@ -179,6 +182,20 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: '#e94560',
         borderColor: '#e94560',
+    },
+    button2: {
+        height: 50,
+        width: 75,
+        position: 'absolute',
+        left: WINDOW_WIDTH /38,
+        top: WINDOW_HEIGHT /1.15,
+        borderRadius: 14,
+        borderWidth: 2,
+        borderColor: '#e94560',
+        backgroundColor: '#e94560',
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
 
