@@ -5,15 +5,15 @@ import Animated from 'react-native-reanimated';
 import { usePanGestureHandler } from 'react-native-redash/src/v1';
 import Card from './Card';
 import { StyleSheet } from 'react-native';
-import { ICard } from './CardDataView';
+import { ICard } from '../../gameData';
 
 interface SwipeViewProps {
-    cards: ICard[];
+    cardData: ICard[];
 }
 
 const { cond, eq, call } = Animated;
 
-const SwipeView: React.FC<SwipeViewProps> = ({ cards }) => {
+const SwipeView: React.FC<SwipeViewProps> = ({ cardData: cards }) => {
     const [current, setCurrent] = useState<number>(0);
     const { blockType, desc, title } = cards[current];
     const {

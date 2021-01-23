@@ -26,6 +26,8 @@ const Game: React.FC<NavProps<'Game'>> = ({ navigation, route }) => {
         placeHolderDetails,
         validation,
         desc,
+        cardData,
+        footerIcons
     } = problems[level - 1];
 
     useEffect(() => {
@@ -127,7 +129,11 @@ const Game: React.FC<NavProps<'Game'>> = ({ navigation, route }) => {
 
     if (show)
         return (
-            <Intermediate problemStatement={problemStatement} level={level} desc={desc}/>
+            <Intermediate
+                problemStatement={problemStatement}
+                level={level}
+                desc={desc}
+            />
         );
 
     return (
@@ -137,19 +143,17 @@ const Game: React.FC<NavProps<'Game'>> = ({ navigation, route }) => {
                 onScroll={onScroll}
                 style={styles.gameArea}
             >
-                {cBDetails.map(({ blockType, code, uid }, index: number) => {
-                    return (
-                        <CodeBlock
-                            blockType={blockType}
-                            code={code}
-                            id={uid}
-                            positions={position}
-                            key={index}
-                            scrollY={scrollY}
-                            scrollView={scrollView}
-                        />
-                    );
-                })}
+                {cBDetails.map(({ blockType, code, uid }, index: number) => (
+                    <CodeBlock
+                        blockType={blockType}
+                        code={code}
+                        id={uid}
+                        positions={position}
+                        key={index}
+                        scrollY={scrollY}
+                        scrollView={scrollView}
+                    />
+                ))}
 
                 {pHDetails.map(({ decision }, dex) => (
                     <Placeholder
@@ -170,6 +174,8 @@ const Game: React.FC<NavProps<'Game'>> = ({ navigation, route }) => {
             <Footer
                 onCircleLongPress={onCircleLongPress}
                 deleteLastCB={deleteLastCB}
+                cardData={cardData}
+                footerIcons={footerIcons}
             />
         </SafeAreaView>
     );
