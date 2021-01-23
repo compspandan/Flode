@@ -3,7 +3,7 @@ import { Dimensions, View,StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Intermediate from '../components/Game/Intermediate';
 import { ScrollView } from 'react-native-gesture-handler';
-import Footer from '../components/Level/Footer';
+import Footer from '../components/Game/Footer';
 import { CenterText } from '../components/Text';
 import { NavProps } from '../ParamList';
 import { details } from '../components/Placeholder/PHDetails.json';
