@@ -1,9 +1,22 @@
 import { Block } from './components/FlowChart/config';
 
+export interface IBlockID {
+    start: string;
+    end: string;
+    'init-sum-0': string;
+    'input-arr': string;
+    'loop-i-0-n': string;
+    'init-n-len-arr': string;
+    'add-i-to-sum': string;
+    'display-sum': string;
+    'divide-sum-by-n': string;
+}
+
 export interface ICodeBlock {
     blockType: keyof Block;
     code: string;
-    id: string;
+    blockID: keyof IBlockID;
+    uid: string;
 }
 
 interface IPlaceHolder {
@@ -26,47 +39,56 @@ export const problems: IProblem[] = [
             {
                 blockType: 'start',
                 code: 'START',
-                id: 'start',
+                blockID: 'start',
+                uid: 'start',
             },
             {
                 blockType: 'io',
                 code: 'array <- input',
-                id: 'input-arr',
+                blockID: 'input-arr',
+                uid: 'input-arr',
             },
             {
                 blockType: 'exec',
                 code: 'n <- Length of Array',
-                id: 'init-n',
+                uid: 'init-n',
+                blockID: 'init-n-len-arr',
             },
             {
                 blockType: 'exec',
                 code: 'sum <- 0',
-                id: 'init-sum',
+                uid: 'init-sum',
+                blockID: 'init-sum-0',
             },
             {
                 blockType: 'loop',
                 code: 'Loop i: 0 -> n',
-                id: 'loop-i-0-n',
+                uid: 'loop-i-0-n',
+                blockID: 'loop-i-0-n',
             },
             {
                 blockType: 'exec',
                 code: 'sum <- sum + i',
-                id: 'add-i-to-sum',
+                uid: 'add-i-to-sum',
+                blockID: 'add-i-to-sum',
             },
             {
                 blockType: 'exec',
                 code: 'sum <- sum / i',
-                id: 'divide-sum-by-n',
+                uid: 'divide-sum-by-n',
+                blockID: 'divide-sum-by-n',
             },
             {
                 blockType: 'io',
                 code: 'print sum',
-                id: 'print-sum',
+                uid: 'display-sum',
+                blockID: 'display-sum',
             },
             {
                 blockType: 'end',
                 code: 'END',
-                id: 'end',
+                uid: 'end',
+                blockID: 'end',
             },
         ],
         validation: [
@@ -77,7 +99,7 @@ export const problems: IProblem[] = [
             'loop-i-0-n',
             'add-i-to-sum',
             'divide-sum-by-n',
-            'print-sum',
+            'display-sum',
             'end',
         ],
         placeHolderDetails: [
@@ -114,11 +136,12 @@ export const problems: IProblem[] = [
         level: 2,
         problemStatement: 'Add two numbers.',
         initBlocks: [
-            { blockType: 'start', code: 'START', id: 'start' },
+            { blockType: 'start', code: 'START', blockID: 'start', uid: '111' },
             {
                 blockType: 'end',
                 code: 'END',
-                id: 'end',
+                blockID: 'end',
+                uid: '000',
             },
         ],
         validation: [],
@@ -154,24 +177,36 @@ export const problems: IProblem[] = [
     },
 ];
 
-interface footerIcons_interface {
+interface IFooterIcon {
     blockType: keyof Block;
+    blockID: keyof IBlockID;
+    code: string;
 }
 
-export const footerIcons: footerIcons_interface[] = [
+export const footerIcons: IFooterIcon[] = [
     {
         blockType: 'start',
+        blockID: 'start',
+        code: 'START',
     },
     {
         blockType: 'exec',
+        blockID: 'init-sum-0',
+        code: 'sum <- 0',
     },
     {
         blockType: 'io',
-    },
-    {
-        blockType: 'cond',
+        blockID: 'input-arr',
+        code: 'array <- input',
     },
     {
         blockType: 'end',
+        blockID: 'end',
+        code: 'END',
+    },
+    {
+        blockType: 'loop',
+        blockID: 'loop-i-0-n',
+        code: 'Loop i: 0 -> n',
     },
 ];

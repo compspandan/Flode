@@ -27,7 +27,7 @@ const animationConfig = {
 };
 
 const SIZE = WIDTH / 5.6;
-const TOP_ADJUSTMENT = (BOX_HEIGHT - SIZE)/2 + 0.05 * SIZE;
+const TOP_ADJUSTMENT = (BOX_HEIGHT - SIZE) / 2 + 0.05 * SIZE;
 
 const getPosition = (order: number, inset: EdgeInsets) => {
     'worklet';
@@ -67,12 +67,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     useAnimatedReaction(
         () => positions.value[id],
         (newOrder) => {
-            //if(!isGestureActive)
-            //{
             const pos = getPosition(newOrder, inset);
             translateX.value = withTiming(pos.x, animationConfig);
             translateY.value = withTiming(pos.y, animationConfig);
-            //}
         }
     );
 
@@ -81,12 +78,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         { x: number; y: number }
     >({
         onStart: (_, ctx) => {
-            ctx.x = translateX.value; //ctx.x and ctx.y is similar to offsetX,offsetY ie orinal pos of object before moving
+            ctx.x = translateX.value; // ctx.x and ctx.y is similar to offsetX,offsetY ie orinal pos of object before moving
             ctx.y = translateY.value;
             isGestureActive.value = true;
         },
         onActive: ({ translationX, translationY }, ctx) => {
-            translateX.value = ctx.x + translationX; //translationX is similar to dragX
+            translateX.value = ctx.x + translationX; // translationX is similar to dragX
             translateY.value = ctx.y + translationY;
             const oldOrder = positions.value[id];
             const newOrder = getOrder(translateY.value, inset, oldOrder);
@@ -104,11 +101,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
                 }
             }
 
-            //for scrolling
+            // for scrolling
             const lowerBound = scrollY.value;
             const upperBound = lowerBound + containerHeight - BOX_HEIGHT;
             const maxScroll = contentHeight - containerHeight;
             const leftToScrollDown = maxScroll - scrollY.value;
+
             if (translateY.value > upperBound) {
                 const diff = Math.min(
                     translateY.value - upperBound,
@@ -130,6 +128,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
                 translateY.value = ctx.y + translationY;
             }
         },
+
         onEnd: () => {
             const destination = getPosition(positions.value[id], inset);
             translateX.value = withTiming(
