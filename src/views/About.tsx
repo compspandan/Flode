@@ -10,7 +10,7 @@ const About: React.FC<NavProps<'About'>> = ({ navigation }) => {
             <Center>
                 <View>
                     <CenterText>About Us</CenterText>
-                    <CenterText>Internet Money</CenterText>
+                    <CenterText>Made By Team Flode</CenterText>
                     <Button
                         title="Go to Landing"
                         onPress={() => navigation.goBack()}
