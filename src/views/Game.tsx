@@ -25,6 +25,7 @@ const Game: React.FC<NavProps<'Game'>> = ({ navigation, route }) => {
         initBlocks,
         placeHolderDetails,
         validation,
+        desc,
     } = problems[level - 1];
 
     useEffect(() => {
@@ -126,7 +127,7 @@ const Game: React.FC<NavProps<'Game'>> = ({ navigation, route }) => {
 
     if (show)
         return (
-            <Intermediate problemStatement={problemStatement} level={level} />
+            <Intermediate problemStatement={problemStatement} level={level} desc={desc}/>
         );
 
     return (

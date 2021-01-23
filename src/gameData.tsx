@@ -47,11 +47,13 @@ interface IProblem {
     initBlocks: ICodeBlock[];
     validation: string[];
     placeHolderDetails: IPlaceHolder[];
+    desc?:string;
 }
 export const problems: IProblem[] = [
     {
         level: 1,
         problemStatement: 'Find the square of a number.',
+        desc:'Find the square of a number using multiplication.',
         initBlocks: [
             { blockType: 'start', code: 'START',blockID: 'start',uid:'0x0' },
             { blockType: 'io', code: 'x <- input', blockID: 'input-x',uid:'0x1' },
@@ -71,6 +73,7 @@ export const problems: IProblem[] = [
     {
         level: 2,
         problemStatement: 'Check if number is a multiple of 4.',
+        desc:'Using modulo operator find if a number is a multiple of 4',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start',uid:'893' },
             { blockType: 'cond', code: 'if n % 4==0', blockID: 'if-n%4',uid:'894' },
@@ -113,7 +116,8 @@ export const problems: IProblem[] = [
     {
         level: 3,
         problemStatement:
-            'Swap lowecase characters to uppercase and uppercase to lowercase.',
+            'Swap lowercase characters to uppercase and uppercase to lowercase.',
+        desc:'Using loops and conditional statements try to swap characters.',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start',uid:'kom' },
             { blockType: 'io', code: 'String<-input', blockID: 'input-s',uid:'9u8593' },
@@ -189,6 +193,7 @@ export const problems: IProblem[] = [
     {
         level: 4,
         problemStatement: 'Find the average of all elements in a list.',
+        desc:'Use a loop control flow to access the ith element of a list.',
         initBlocks: [
             {
                 blockType: 'start',
