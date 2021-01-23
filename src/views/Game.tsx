@@ -129,12 +129,8 @@ const Game: React.FC<NavProps<'Game'>> = ({ navigation, route }) => {
             <Intermediate problemStatement={problemStatement} level={level} />
         );
 
-    const display = () => {
-        console.log(position.value);
-    };
     return (
         <SafeAreaView>
-            {display()}
             <Animated.ScrollView
                 ref={scrollView}
                 onScroll={onScroll}

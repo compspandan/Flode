@@ -23,6 +23,14 @@ interface headerModalProps {
     validation: string[];
 }
 
+const decodeObj = (obj) => {
+    const decodedObj = Object.keys(obj).map((key) => {
+        const decodedKey = key.substr(0, key.indexOf('?'));
+        return { [decodedKey]: obj[key] };
+    });
+    return Object.assign({}, ...decodedObj);
+};
+
 const HeaderModal: React.FC<headerModalProps> = ({
     level,
     navigation,
@@ -37,8 +45,9 @@ const HeaderModal: React.FC<headerModalProps> = ({
     const validate = () => {
         Setflag(true);
         Setbutname(0);
+        const decodedObj = decodeObj(position.value);
         for (var i = 0; i < validation.length; i++) {
-            if (i != position.value[validation[i]]) {
+            if (i != decodedObj[validation[i]]) {
                 Setflag(false);
                 Setbutname(1);
             }
