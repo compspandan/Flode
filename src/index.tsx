@@ -7,16 +7,16 @@ import About from './views/About';
 import Landing from './views/Landing';
 import Levels from './views/Levels';
 import { Comfortaa_700Bold, useFonts } from '@expo-google-fonts/comfortaa';
-import {Ubuntu_500Medium} from "@expo-google-fonts/ubuntu";
+import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 import AppLoading from 'expo-app-loading';
-import Game from "./views/Game";
+import Game from './views/Game';
 
 const Stack = createStackNavigator<ParamList>();
 
 const App = () => {
     let [fontsLoaded] = useFonts({
         Comfortaa_700Bold,
-        Ubuntu_500Medium
+        Ubuntu_500Medium,
     });
 
     if (!fontsLoaded) {
