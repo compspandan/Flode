@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, View, Dimensions } from 'react-native';
-import { problems } from '../../gameData.json';
+import { problems } from '../../gameData';
 import Svg, { SvgXml } from 'react-native-svg';
 
 const { width, height } = Dimensions.get('window');

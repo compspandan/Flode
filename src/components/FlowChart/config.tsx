@@ -1,6 +1,6 @@
 import Animated from 'react-native-reanimated';
 
-type Block = {
+export type Block = {
     start: String;
     io: String;
     exec: String;
@@ -41,51 +41,26 @@ export const code_blocks: code_block_interface[] = [
     {
         blockType: 'start',
         code: 'START',
+        id: 'code0',
+    },
+    {
+        blockType: 'exec',
+        code: 'EXEC',
         id: 'code1',
     },
     {
-        blockType: 'exec',
-        code: 'EXEC',
+        blockType: 'io',
+        code: 'IO',
         id: 'code2',
     },
     {
-        blockType: 'io',
-        code: 'IO',
+        blockType: 'cond',
+        code: 'COND',
         id: 'code3',
-    },
-    {
-        blockType: 'cond',
-        code: 'COND',
-        id: 'code4',
-    },
-    {
-        blockType: 'exec',
-        code: 'EXEC',
-        id: 'code5',
-    },
-    {
-        blockType: 'cond',
-        code: 'COND',
-        id: 'code6',
-    },
-    {
-        blockType: 'io',
-        code: 'IO',
-        id: 'code7',
-    },
-    {
-        blockType: 'loop',
-        code: 'LOOP',
-        id: 'code8',
-    },
-    {
-        blockType: 'exec',
-        code: 'EXEC',
-        id: 'code9',
     },
     {
         blockType: 'end',
         code: 'END',
-        id: 'code10',
+        id: 'code4',
     },
 ];
