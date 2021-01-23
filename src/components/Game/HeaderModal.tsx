@@ -1,31 +1,39 @@
-import React,{useState} from "react";
-import { TouchableOpacity, Text, Modal, View, Dimensions, StyleSheet } from "react-native";
+import React, { useState } from 'react';
+import {
+    TouchableOpacity,
+    Text,
+    Modal,
+    View,
+    Dimensions,
+    StyleSheet,
+} from 'react-native';
 import { BlurView } from 'expo-blur';
 import Animated from 'react-native-reanimated';
-import {
-    AntDesign,
-    Feather,
-} from '@expo/vector-icons';
-import { StackNavigationProp } from "@react-navigation/stack";
-import { ParamList } from "../../ParamList";
-import { positionInterface } from "../FlowChart/config";
+import { AntDesign, Feather } from '@expo/vector-icons';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { ParamList } from '../../ParamList';
+import { positionInterface } from '../FlowChart/config';
 
 const { height: WINDOW_HEIGHT, width: WINDOW_WIDTH } = Dimensions.get('window');
 
-interface headerModalProps{
-    level:number;
-    navigation: StackNavigationProp<ParamList, "Game">;
+interface headerModalProps {
+    level: number;
+    navigation: StackNavigationProp<ParamList, 'Game'>;
     position: Animated.SharedValue<positionInterface>;
     validation: string[];
 }
 
-const HeaderModal:React.FC<headerModalProps>=({level,navigation,position,validation})=>{
-
+const HeaderModal: React.FC<headerModalProps> = ({
+    level,
+    navigation,
+    position,
+    validation,
+}) => {
     const [flag, Setflag] = useState(false);
     const [opac, Setopac] = useState(1);
     const [modalVisible, SetmodalVisible] = useState(false);
     const [butname, Setbutname] = useState(1);
-    const [gamelvl, Setgamelvl] = useState(level);
+
     const validate = () => {
         Setflag(true);
         Setbutname(0);
@@ -38,8 +46,9 @@ const HeaderModal:React.FC<headerModalProps>=({level,navigation,position,validat
         SetmodalVisible(true);
     };
 
-    return <>
-        <TouchableOpacity style={styles.button1} onPress={validate}>
+    return (
+        <>
+            <TouchableOpacity style={styles.button1} onPress={validate}>
                 <Text style={{ color: 'white' }}>Submit</Text>
             </TouchableOpacity>
             <Modal
@@ -102,7 +111,10 @@ const HeaderModal:React.FC<headerModalProps>=({level,navigation,position,validat
                                 onPress={() => {
                                     butname
                                         ? SetmodalVisible(false)
-                                        :navigation.replace("Game",{level:level+1});SetmodalVisible(false);
+                                        : navigation.replace('Game', {
+                                              level: level + 1,
+                                          });
+                                    SetmodalVisible(false);
                                 }}
                                 style={[
                                     styles.popupbuttons,
@@ -123,9 +135,9 @@ const HeaderModal:React.FC<headerModalProps>=({level,navigation,position,validat
                     </View>
                 </BlurView>
             </Modal>
-    </>
-
-}
+        </>
+    );
+};
 
 const styles = StyleSheet.create({
     button1: {
@@ -167,7 +179,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: '#e94560',
         borderColor: '#e94560',
-    }
-})
+    },
+});
 
 export default HeaderModal;

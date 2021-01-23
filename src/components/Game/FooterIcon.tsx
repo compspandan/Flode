@@ -1,3 +1,4 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import {
     Dimensions,
@@ -5,7 +6,7 @@ import {
     TouchableNativeFeedback,
     View,
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { IBlockID } from '../../gameData';
 import { Block, colors } from '../FlowChart/config';
 
 const { width: WIDTH } = Dimensions.get('screen');
@@ -14,16 +15,23 @@ const PADDING = WIDTH / 70;
 
 interface FooterProps {
     blockType: keyof Block;
-    onCircleLongPress(x: keyof Block): void;
+    blockID: keyof IBlockID;
+    onCircleLongPress(
+        blockType: keyof Block,
+        blockID: keyof IBlockID,
+        code: string
+    ): void;
+    code: string;
 }
 
 const FooterIcon: React.FC<FooterProps> = ({
     blockType,
     onCircleLongPress,
+    blockID,
+    code,
 }) => {
-    const longPress = () => {
-        onCircleLongPress(blockType);
-    };
+    const longPress = () => onCircleLongPress(blockType, blockID, code);
+
     return (
         <TouchableNativeFeedback onLongPress={longPress}>
             <View style={styles.padding}>
