@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ onCircleLongPress, deleteLastCB }) => {
         value: translation.y,
         snapPoints: [
             0,
-            TOTAL_FOOTER_HEIGHT - HEIGHT + FLOATING_SWIPE_UP_BAR_WIDTH,
+            TOTAL_FOOTER_HEIGHT - HEIGHT,
         ],
         config,
     });

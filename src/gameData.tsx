@@ -39,14 +39,14 @@ export const problems: IProblem[] = [
                 id: 'init-n',
             },
             {
-                blockType: 'exec',
-                code: 'sum <- 0',
-                id: 'init-sum',
-            },
-            {
                 blockType: 'loop',
                 code: 'Loop i: 0 -> n',
                 id: 'loop-i-0-n',
+            },
+            {
+                blockType: 'exec',
+                code: 'sum <- 0',
+                id: 'init-sum',
             },
             {
                 blockType: 'exec',
