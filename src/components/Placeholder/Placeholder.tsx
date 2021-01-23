@@ -50,10 +50,12 @@ const Placeholder: React.FC<PlaceholderProps> = ({ decision, last }) => {
     );
 };
 
-const BOX_HEIGHT = height / 10;
+export const BOX_HEIGHT = height / 10;
+export const ARROW_HEIGHT = 65;
 
 const styles = StyleSheet.create({
     box: {
+        marginTop: 0,
         marginHorizontal: width / 10,
         backgroundColor: '#cacfcc',
         borderRadius: 5,
