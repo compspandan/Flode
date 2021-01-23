@@ -1,22 +1,26 @@
 import { Entypo } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import { usePanGestureHandler, withSpring } from 'react-native-redash/src/v1';
 import FooterIcon from './FooterIcon';
+import { footerIcons } from '../../gameData';
+import CardDataView from './CardDataView';
+import { Block } from '../FlowChart/config';
 
 const { height: HEIGHT, width: WIDTH } = Dimensions.get('window');
 const FOOTER_HEIGHT = HEIGHT / 12;
 const ACTION_BTN_WIDTH = WIDTH / 7;
 const FLOATING_SWIPE_UP_BAR_WIDTH = HEIGHT / 40;
+const CARD_VIEW_HEIGHT = HEIGHT - FOOTER_HEIGHT;
 export const TOTAL_FOOTER_HEIGHT = FOOTER_HEIGHT + FLOATING_SWIPE_UP_BAR_WIDTH;
 
-// https://uigradients.com/#Lawrencium
-const gradientColors = ['#0f0c29', '#302b63', '#24243e'];
+interface FooterProps {
+    onCircleLongPress(x:keyof Block):void
+}
 
-const Footer = () => {
+const Footer: React.FC<FooterProps> = ({ onCircleLongPress }) => {
     const {
         gestureHandler,
         state,
@@ -54,15 +58,13 @@ const Footer = () => {
                 style={[styles.foot, { transform: [{ translateY }] }]}
             >
                 <ScrollView horizontal={true}>
-                    <FooterIcon color="white" />
-                    <FooterIcon color="red" />
-                    <FooterIcon color="green" />
-                    <FooterIcon color="yellow" />
-                    <FooterIcon color="white" />
-                    <FooterIcon color="white" />
-                    <FooterIcon color="white" />
-                    <FooterIcon color="white" />
-                    <FooterIcon color="white" />
+                    {footerIcons.map(({ blockType }, key) => (
+                        <FooterIcon
+                            key={key}
+                            blockType={blockType}
+                            onCircleLongPress={onCircleLongPress}
+                        />
+                    ))}
                 </ScrollView>
                 <View style={styles.trashBox}>
                     <Entypo
@@ -73,12 +75,7 @@ const Footer = () => {
                     />
                 </View>
             </Animated.View>
-            <Animated.View style={{ transform: [{ translateY }] }}>
-                <LinearGradient
-                    style={styles.cardsView}
-                    colors={gradientColors}
-                />
-            </Animated.View>
+            <CardDataView translateY={translateY} cardViewHeight={CARD_VIEW_HEIGHT} />
         </View>
     );
 };
@@ -107,9 +104,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#e94560',
         display: 'flex',
         justifyContent: 'center',
-    },
-    cardsView: {
-        height: HEIGHT - FOOTER_HEIGHT,
     },
     bar_view: {
         height: FLOATING_SWIPE_UP_BAR_WIDTH,

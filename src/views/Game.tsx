@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View, Text} from 'react-native';
 import Animated, {
     useAnimatedRef,
     useAnimatedScrollHandler,
@@ -7,7 +7,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CodeBlock from '../components/FlowChart/CodeBlock';
-import { code_blocks, positionInterface } from '../components/FlowChart/config';
+import { Block, code_blocks, positionInterface } from '../components/FlowChart/config';
 import Footer, { TOTAL_FOOTER_HEIGHT } from '../components/Game/Footer';
 import Intermediate from '../components/Game/Intermediate';
 import { details } from '../components/Placeholder/PHDetails.json';
@@ -39,12 +39,25 @@ const Game: React.FC<NavProps<'Game'>> = ({ route }) => {
         },
     });
 
-    const [cBPos,setCBPos] = useState(Object.assign(  //setCBPos(position.value) before changing state of any hook
+    const [cBDetails,setCBDetails] = useState(code_blocks)
+
+    const [cBPos,setCBPos] = useState(Object.assign(
         {},
         ...code_blocks.map((elem, index: number) => ({ [elem.id]: index }))
     ));
 
     const position = useSharedValue<positionInterface>(cBPos);
+
+    const [pHDetails, setPHDetails] = useState(details);
+
+    const onCircleLongPress = (x:keyof Block) => {
+        const code = x.toString().toUpperCase();
+        const i =  cBDetails.length
+        const id = "code"+i.toString();
+        setPHDetails([...pHDetails, { decision: false }]);
+        setCBPos({...position.value,[id]:i})  //don't switch orders
+        setCBDetails([...cBDetails,{blockType:x,code:code,id:id}])
+    };
 
     if (show) return <Intermediate level={level} />;
 
@@ -55,7 +68,7 @@ const Game: React.FC<NavProps<'Game'>> = ({ route }) => {
                 onScroll={onScroll}
                 style={styles.gameArea}
             >
-                {code_blocks.map((elem, index: number) => {
+                {cBDetails.map((elem, index: number) => {
                     return (
                         <CodeBlock
                             blockType={elem.blockType}
@@ -69,19 +82,17 @@ const Game: React.FC<NavProps<'Game'>> = ({ route }) => {
                     );
                 })}
 
-                {details.map((elem, index) => {
-                    return (
-                        <Placeholder
-                            key={index}
-                            id={index}
-                            last={elem.last}
-                            decision={elem.decision}
-                        />
-                    );
-                })}
-                <View style={{ marginBottom: WINDOW_HEIGHT / 12 }}></View>
+                {pHDetails.map(({ decision }, dex) => (
+                    <Placeholder
+                        key={dex}
+                        id={dex}
+                        decision={decision}
+                        last={dex + 1 === pHDetails.length}
+                    />
+                ))}
+                <View style={{ marginBottom: WINDOW_HEIGHT / 12 }} />
             </Animated.ScrollView>
-            <Footer />
+            <Footer onCircleLongPress={onCircleLongPress} />
         </SafeAreaView>
     );
 };
