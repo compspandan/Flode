@@ -9,6 +9,7 @@ import Levels from './views/Levels';
 import { Comfortaa_700Bold, useFonts } from '@expo-google-fonts/comfortaa';
 import {Ubuntu_500Medium} from "@expo-google-fonts/ubuntu";
 import AppLoading from 'expo-app-loading';
+import Game from "./views/Game";
 
 const Stack = createStackNavigator<ParamList>();
 
@@ -30,6 +31,7 @@ const App = () => {
                 <Stack.Screen name="About" component={About} />
                 <Stack.Screen name="Levels" component={Levels} />
                 <Stack.Screen name="Landing" component={Landing} />
+                <Stack.Screen name="Game" component={Game} />
             </Stack.Navigator>
         </NavigationContainer>
     );
