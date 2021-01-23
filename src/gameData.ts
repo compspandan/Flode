@@ -28,7 +28,9 @@ export interface IBlockID {
     'if-j-a[i]': string;
     'print-j': string;
     'init-j': string;
+    'display-y': string;
     'input-n': string;
+    'y-x*x': string;
 }
 
 export interface ICodeBlock {
@@ -42,19 +44,34 @@ interface IPlaceHolder {
     decision: boolean;
 }
 
+export interface ICard {
+    title: string;
+    desc: string;
+    blockType: keyof Block;
+}
+
+export interface IFooterIcon {
+    blockType: keyof Block;
+    blockID: keyof IBlockID;
+    code: string;
+}
+
 interface IProblem {
     level: number;
     problemStatement: string;
     initBlocks: ICodeBlock[];
     validation: string[];
     placeHolderDetails: IPlaceHolder[];
-    desc?:string;
+    desc?: string;
+    cardData: ICard[];
+    footerIcons: IFooterIcon[];
 }
+
 export const problems: IProblem[] = [
     {
         level: 1,
         problemStatement: 'Find the square of a number.',
-        desc:'Find the square of a number using multiplication.',
+        desc: 'Find the square of a number using multiplication.',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '0x0' },
             {
@@ -66,18 +83,18 @@ export const problems: IProblem[] = [
             {
                 blockType: 'exec',
                 code: 'y <- x * x',
-                blockID: 'multiply-x',
+                blockID: 'y-x*x',
                 uid: '0x2',
             },
             {
                 blockType: 'io',
-                code: 'print y',
-                blockID: 'print-x',
+                code: 'display y',
+                blockID: 'display-y',
                 uid: '0x3',
             },
             { blockType: 'end', code: 'END', blockID: 'end', uid: '0x4' },
         ],
-        validation: ['start', 'input-x', 'multiply-x', 'print-x', 'end'],
+        validation: ['start', 'input-x', 'y-x*x', 'display-y', 'end'],
         placeHolderDetails: [
             { decision: false },
             { decision: false },
@@ -85,11 +102,77 @@ export const problems: IProblem[] = [
             { decision: false },
             { decision: false },
         ],
+        cardData: [
+            {
+                blockType: 'start',
+                title: 'START',
+                desc: 'Block to be placed at the beginning of the flowchart.',
+            },
+            {
+                title: 'x <- input',
+                desc:
+                    'Takes input from user. Stores input in variable x. \nIt can be a number, string, array, etc.',
+                blockType: 'io',
+            },
+            {
+                title: 'y <- x * x',
+                desc: 'Multiplies x with iteself and stores value in y. ',
+                blockType: 'exec',
+            },
+            {
+                title: 'display y',
+                desc: "Displays value in y on user's screen",
+                blockType: 'io',
+            },
+            {
+                title: 'Loop i: 0 -> n',
+                desc:
+                    'Initialises i to 0 and starts a loop.\nIncrements every loop iteration.\nEnds the loop when i is equal to n (size of the array) .',
+                blockType: 'loop',
+            },
+            {
+                blockType: 'end',
+                title: 'END',
+                desc: 'lock to be placed at the end of the flowchart.',
+            },
+        ],
+        footerIcons: [
+            {
+                blockType: 'start',
+                blockID: 'start',
+                code: 'START',
+            },
+            {
+                blockType: 'io',
+                blockID: 'input-x',
+                code: 'x <- input',
+            },
+            {
+                blockType: 'exec',
+                blockID: 'y-x*x',
+                code: 'y <- x * x',
+            },
+            {
+                blockType: 'io',
+                blockID: 'display-y',
+                code: 'display y',
+            },
+            {
+                blockType: 'loop',
+                blockID: 'loop-i-0-n',
+                code: 'Loop i: 0 -> n',
+            },
+            {
+                blockType: 'end',
+                blockID: 'end',
+                code: 'END',
+            },
+        ],
     },
     {
         level: 2,
         problemStatement: 'Check if number is a multiple of 4.',
-        desc:'Using modulo operator find if a number is a multiple of 4',
+        desc: 'Using modulo operator find if a number is a multiple of 4',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '893' },
             {
@@ -148,12 +231,78 @@ export const problems: IProblem[] = [
             { decision: false },
             { decision: false },
         ],
+        cardData: [
+            {
+                blockType: 'start',
+                title: 'START',
+                desc: 'Block to be placed at the beginning of the flowchart.',
+            },
+            {
+                title: 'x <- input',
+                desc:
+                    'Takes input from user. Stores input in variable x. \nIt can be a number, string, array, etc.',
+                blockType: 'io',
+            },
+            {
+                title: 'y <- x * x',
+                desc: 'Multiplies x with iteself and stores value in y. ',
+                blockType: 'exec',
+            },
+            {
+                title: 'display y',
+                desc: "Displays value in y on user's screen",
+                blockType: 'io',
+            },
+            {
+                title: 'Loop i: 0 -> n',
+                desc:
+                    'Initialises i to 0 and starts a loop.\nIncrements every loop iteration.\nEnds the loop when i is equal to n (size of the array) .',
+                blockType: 'loop',
+            },
+            {
+                blockType: 'end',
+                title: 'END',
+                desc: 'lock to be placed at the end of the flowchart.',
+            },
+        ],
+        footerIcons: [
+            {
+                blockType: 'start',
+                blockID: 'start',
+                code: 'START',
+            },
+            {
+                blockType: 'io',
+                blockID: 'input-x',
+                code: 'x <- input',
+            },
+            {
+                blockType: 'exec',
+                blockID: 'y-x*x',
+                code: 'y <- x * x',
+            },
+            {
+                blockType: 'io',
+                blockID: 'display-y',
+                code: 'display y',
+            },
+            {
+                blockType: 'loop',
+                blockID: 'loop-i-0-n',
+                code: 'Loop i: 0 -> n',
+            },
+            {
+                blockType: 'end',
+                blockID: 'end',
+                code: 'END',
+            },
+        ],
     },
     {
         level: 3,
         problemStatement:
             'Swap lowercase characters to uppercase and uppercase to lowercase.',
-        desc:'Using loops and conditional statements try to swap characters.',
+        desc: 'Using loops and conditional statements try to swap characters.',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: 'kom' },
             {
@@ -171,7 +320,7 @@ export const problems: IProblem[] = [
             { blockType: 'cond', code: '{', blockID: '{', uid: '98792' },
             {
                 blockType: 'cond',
-                code: 'if String[i] is Lowercase',
+                code: "if i'th character is Lowercase",
                 blockID: 'if-x.lower',
                 uid: 'kpop',
             },
@@ -235,11 +384,13 @@ export const problems: IProblem[] = [
             { decision: false },
             { decision: false },
         ],
+        cardData: [],
+        footerIcons: [],
     },
     {
         level: 4,
         problemStatement: 'Find the average of all elements in a list.',
-        desc:'Use a loop control flow to access the ith element of a list.',
+        desc: 'Use a loop control flow to access the ith element of a list.',
         initBlocks: [
             {
                 blockType: 'start',
@@ -336,6 +487,8 @@ export const problems: IProblem[] = [
                 decision: false,
             },
         ],
+        cardData: [],
+        footerIcons: [],
     },
     {
         level: 5,
@@ -388,6 +541,8 @@ export const problems: IProblem[] = [
             { decision: false },
             { decision: false },
         ],
+        cardData: [],
+        footerIcons: [],
     },
     {
         level: 6,
@@ -395,6 +550,8 @@ export const problems: IProblem[] = [
         placeHolderDetails: [],
         initBlocks: [],
         validation: [],
+        cardData: [],
+        footerIcons: [],
     },
     {
         level: 7,
@@ -402,6 +559,8 @@ export const problems: IProblem[] = [
         placeHolderDetails: [],
         initBlocks: [],
         validation: [],
+        cardData: [],
+        footerIcons: [],
     },
     {
         level: 8,
@@ -409,39 +568,7 @@ export const problems: IProblem[] = [
         placeHolderDetails: [],
         initBlocks: [],
         validation: [],
-    },
-];
-
-interface IFooterIcon {
-    blockType: keyof Block;
-    blockID: keyof IBlockID;
-    code: string;
-}
-
-export const footerIcons: IFooterIcon[] = [
-    {
-        blockType: 'start',
-        blockID: 'start',
-        code: 'START',
-    },
-    {
-        blockType: 'exec',
-        blockID: 'init-sum-0',
-        code: 'sum <- 0',
-    },
-    {
-        blockType: 'io',
-        blockID: 'input-arr',
-        code: 'array <- input',
-    },
-    {
-        blockType: 'end',
-        blockID: 'end',
-        code: 'END',
-    },
-    {
-        blockType: 'loop',
-        blockID: 'loop-i-0-n',
-        code: 'Loop i: 0 -> n',
+        cardData: [],
+        footerIcons: [],
     },
 ];
