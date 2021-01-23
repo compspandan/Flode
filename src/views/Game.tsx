@@ -39,12 +39,12 @@ const Game: React.FC<NavProps<'Game'>> = ({ route }) => {
         },
     });
 
-    const position = useSharedValue<positionInterface>(
-        Object.assign(
-            {},
-            ...code_blocks.map((elem, index: number) => ({ [elem.id]: index }))
-        )
-    );
+    const [cBPos,setCBPos] = useState(Object.assign(  //setCBPos(position.value) before changing state of any hook
+        {},
+        ...code_blocks.map((elem, index: number) => ({ [elem.id]: index }))
+    ));
+
+    const position = useSharedValue<positionInterface>(cBPos);
 
     if (show) return <Intermediate level={level} />;
 
