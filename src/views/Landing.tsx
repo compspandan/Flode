@@ -1,18 +1,27 @@
+import { Comfortaa_700Bold, useFonts } from '@expo-google-fonts/comfortaa';
+import AppLoading from 'expo-app-loading';
 import React from 'react';
 import {
     Dimensions,
     StyleSheet,
     Text,
     TouchableOpacity,
-    View
+    View,
 } from 'react-native';
 import Svg, { Ellipse, SvgXml } from 'react-native-svg';
-import imagesvg from '../components/ArcSVG';
 import { NavProps } from '../ParamList';
+import imagesvg from '../components/ArcSVG';
 
 const { width, height } = Dimensions.get('window');
 
 const Landing: React.FC<NavProps<'Landing'>> = ({ navigation }) => {
+    let [fontsLoaded] = useFonts({
+        Comfortaa_700Bold,
+    });
+
+    if (!fontsLoaded) {
+        return <AppLoading />;
+    }
     return (
         <View style={{ height }}>
             <View style={{ flex: 1, backgroundColor: '#E5E5E5' }}>
