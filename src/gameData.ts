@@ -238,26 +238,44 @@ export const problems: IProblem[] = [
                 desc: 'Block to be placed at the beginning of the flowchart.',
             },
             {
-                title: 'x <- input',
+                title: '{',
                 desc:
-                    'Takes input from user. Stores input in variable x. \nIt can be a number, string, array, etc.',
+                    'A block which acts as the opening parenthesis to indicate start of loops and conditional statements.',
+                blockType: 'cond',
+            },
+            {
+                title: '}',
+                desc:
+                    'A block which acts as the closing parenthesis to indicate end of loops and conditional statements.',
+                blockType: 'cond',
+            },
+            {
+                title: 'else',
+                desc:
+                    'It is used with "if" condition when it fails. In this case if the condition fails it will execute "else".',
+                blockType: 'cond',
+            },
+            {
+                title: 'if n%4(n modulo 4) == 0',
+                desc:
+                    'A modulo operator is used to get the remainder of n/4. An if conditional statement checks if the given remainder is zero.',
+                blockType: 'cond',
+            },
+            {
+                title: 'display YES',
+                desc: "Displays YES on user's screen",
                 blockType: 'io',
             },
             {
-                title: 'y <- x * x',
-                desc: 'Multiplies x with iteself and stores value in y. ',
-                blockType: 'exec',
-            },
-            {
-                title: 'display y',
-                desc: "Displays value in y on user's screen",
+                title: 'display NO',
+                desc: "Displays NO on user's screen",
                 blockType: 'io',
             },
             {
-                title: 'Loop i: 0 -> n',
+                title: 'n <- input',
                 desc:
-                    'Initialises i to 0 and starts a loop.\nIncrements every loop iteration.\nEnds the loop when i is equal to n (size of the array) .',
-                blockType: 'loop',
+                    'Takes input from user. Stores input in variable n. \nIt can be a number, string, array, etc.',
+                blockType: 'io',
             },
             {
                 blockType: 'end',
@@ -272,24 +290,39 @@ export const problems: IProblem[] = [
                 code: 'START',
             },
             {
+                blockType: 'cond',
+                blockID: '{',
+                code: '{',
+            },
+            {
+                blockType: 'cond',
+                blockID: '}',
+                code: '}',
+            },
+            {
+                blockType: 'cond',
+                blockID: 'else',
+                code: 'else',
+            },
+            {
+                blockType: 'cond',
+                blockID: 'if-n%4',
+                code: 'if n % 4 == 0',
+            },
+            {
                 blockType: 'io',
-                blockID: 'input-x',
-                code: 'x <- input',
-            },
-            {
-                blockType: 'exec',
-                blockID: 'y-x*x',
-                code: 'y <- x * x',
+                blockID: 'printyes',
+                code: 'print YES',
             },
             {
                 blockType: 'io',
-                blockID: 'display-y',
-                code: 'display y',
+                blockID: 'printno',
+                code: 'print NO',
             },
             {
-                blockType: 'loop',
-                blockID: 'loop-i-0-n',
-                code: 'Loop i: 0 -> n',
+                blockType: 'io',
+                code: 'n <- input',
+                blockID: 'input-n',
             },
             {
                 blockType: 'end',
@@ -332,7 +365,7 @@ export const problems: IProblem[] = [
                 uid: '58604',
             },
             { blockType: 'cond', code: '}', blockID: '}', uid: '644' },
-            { blockType: 'cond', code: 'Else', blockID: 'else', uid: 'utr' },
+            { blockType: 'cond', code: 'else', blockID: 'else', uid: 'utr' },
             { blockType: 'cond', code: '{', blockID: '{', uid: '9876' },
             {
                 blockType: 'exec',
@@ -384,8 +417,97 @@ export const problems: IProblem[] = [
             { decision: false },
             { decision: false },
         ],
-        cardData: [],
-        footerIcons: [],
+        cardData: [
+            {
+                blockType: 'start',
+                title: 'START',
+                desc: 'Block to be placed at the beginning of the flowchart.',
+            },
+            {
+                blockType: 'io',
+                title: 'String<-input',
+                desc:
+                    'Takes input from user. Stores input in variable String. ',
+            },
+            {
+                blockType: 'loop',
+                title: 'Loop i=0->len(String)',
+                desc:
+                    'Initialises i to 0 and starts a loop.\nIncrements every loop iteration.\nEnds the loop when i is equal to (length of String) .',
+            },
+            {
+                blockType: 'cond',
+                title: '{',
+                desc:
+                    'A block which acts as the opening parenthesis to indicate start of loops and conditional statements.',
+            },
+            {
+                blockType: 'cond',
+                title: "if i'th character is Lowercase",
+                desc:
+                    'Assigns the ith element of String to the lowercase of the ith elemenent of String ',
+            },
+            {
+                blockType: 'exec',
+                title: 'String[i]=String[i] to uppercase',
+                desc:
+                    'Assigns the ith element of String to the uppecase of the ith elemenent of String.',
+            },
+            {
+                blockType: 'cond',
+                title: '}',
+                desc:
+                    'A block which acts as the closing parenthesis to indicate end of loops and conditional statements.',
+            },
+            {
+                blockType: 'cond',
+                title: 'else',
+                desc:
+                    'It is used with "if" condition when it fails. In this case if the condition fails it will execute "else".',
+            },
+            {
+                blockType: 'io',
+                title: 'print String',
+                desc: "Displays the variable String on the user's screen",
+            },
+            {
+                blockType: 'end',
+                title: 'END',
+                desc: 'lock to be placed at the end of the flowchart.',
+            },
+        ],
+        footerIcons: [
+            { blockType: 'start', code: 'START', blockID: 'start' },
+            {
+                blockType: 'io',
+                code: 'String<-input',
+                blockID: 'input-s',
+            },
+            {
+                blockType: 'loop',
+                code: 'Loop i=0->len(String)',
+                blockID: 'loop-i-0-n',
+            },
+            { blockType: 'cond', code: '{', blockID: '{' },
+            {
+                blockType: 'cond',
+                code: "if i'th character is Lowercase",
+                blockID: 'if-x.lower',
+            },
+            {
+                blockType: 'exec',
+                code: 'String[i]=String[i] to uppercase',
+                blockID: 's[i]-upper',
+            },
+            { blockType: 'cond', code: '}', blockID: '}' },
+            { blockType: 'cond', code: 'else', blockID: 'else' },
+            {
+                blockType: 'io',
+                code: 'print String',
+                blockID: 'print-s',
+            },
+            { blockType: 'end', code: 'END', blockID: 'end' },
+        ],
     },
     {
         level: 4,
@@ -487,20 +609,104 @@ export const problems: IProblem[] = [
                 decision: false,
             },
         ],
-        cardData: [],
-        footerIcons: [],
+        cardData: [
+            {
+                blockType: 'start',
+                title: 'START',
+                desc: 'Block to be placed at the beginning of the flowchart.',
+            },
+            {
+                blockType: 'io',
+                title: 'array<-input',
+                desc:
+                    'Takes input from user and stores input in the array. ',
+            },
+            {
+                blockType: 'exec',
+                title: 'n <- Length of Array',
+                desc:'Assigns Length of array to variable "n"',
+            },
+            {
+                blockType: 'exec',
+                title: 'sum <- 0',
+                desc:'Assigns zero(0) to variable "sum"',
+            },
+            {
+                title: 'Loop i: 0 -> n',
+                desc:
+                    'Initialises i to 0 and starts a loop.\nIncrements every loop iteration.\nEnds the loop when i is equal to n (size of the array) .',
+                blockType: 'loop',
+            },
+            {
+                title:'sum <- sum / i',
+                blockType:'exec',
+                desc:'Stores the value of sum/i back into sum',
+            },
+            {
+                blockType: 'io',
+                title: 'print sum',
+                desc: "Displays the variable 'sum' on the user's screen",
+            },
+            {
+                blockType: 'end',
+                title: 'END',
+                desc: 'lock to be placed at the end of the flowchart.',
+            },
+
+        ],
+        footerIcons: [
+            {
+                blockType: 'start',
+                code: 'START',
+                blockID: 'start',
+            },
+            {
+                blockType: 'io',
+                code: 'array <- input',
+                blockID: 'input-arr',
+            },
+            {
+                blockType: 'exec',
+                code: 'n <- Length of Array',
+                blockID: 'init-n-len-arr',
+            },
+            {
+                blockType: 'exec',
+                code: 'sum <- 0',
+                blockID: 'init-sum-0',
+            },
+            {
+                blockType: 'loop',
+                code: 'Loop i: 0 -> n',
+                blockID: 'loop-i-0-n',
+            },
+            {
+                blockType: 'exec',
+                code: 'sum <- sum + i',
+                blockID: 'add-i-to-sum',
+            },
+            {
+                blockType: 'exec',
+                code: 'sum <- sum / i',
+                blockID: 'divide-sum-by-n',
+            },
+            {
+                blockType: 'io',
+                code: 'print sum',
+                blockID: 'display-sum',
+            },
+            {
+                blockType: 'end',
+                code: 'END',
+                blockID: 'end',
+            },
+        ],
     },
     {
         level: 5,
         problemStatement: 'Twins in a list(Consecutive repeating numbers).',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '111' },
-            {
-                blockType: 'end',
-                code: 'END',
-                blockID: 'end',
-                uid: '000',
-            },
             {
                 blockType: 'cond',
                 code: 'if j==array[i]',
@@ -541,7 +747,19 @@ export const problems: IProblem[] = [
             { decision: false },
             { decision: false },
         ],
-        cardData: [],
+        cardData: [
+            {
+                blockType: 'start',
+                title: 'START',
+                desc: 'Block to be placed at the beginning of the flowchart.',
+            },
+            {
+                blockType: 'io',
+                title: 'array<-input',
+                desc:
+                    'Takes input from user and stores input in the array. ',
+            },
+        ],
         footerIcons: [],
     },
     {
