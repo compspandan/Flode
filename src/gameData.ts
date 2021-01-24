@@ -211,7 +211,7 @@ export const problems: IProblem[] = [
         ],
         validation: [
             'start',
-            'input-i',
+            'input-n',
             'if-n%4',
             '{',
             'printyes',
