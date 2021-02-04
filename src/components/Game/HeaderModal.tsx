@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import {
-    TouchableOpacity,
-    Text,
-    Modal,
-    View,
-    Dimensions,
-    StyleSheet,
-} from 'react-native';
-import { BlurView } from 'expo-blur';
-import Animated from 'react-native-reanimated';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { BlurView } from 'expo-blur';
+import React, { useState } from 'react';
+import {
+    Dimensions,
+    Modal,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
+import Animated from 'react-native-reanimated';
 import { ParamList } from '../../ParamList';
 import { positionInterface } from '../FlowChart/config';
 
@@ -23,12 +23,21 @@ interface headerModalProps {
     validation: string[];
 }
 
+interface IDecodedObj {
+    [key: string]: string[];
+}
+
 const decodeObj = (obj) => {
-    const decodedObj = Object.keys(obj).map((key) => {
+    let decodedObj: IDecodedObj = {};
+    for (var key in obj) {
         const decodedKey = key.substr(0, key.indexOf('?'));
-        return { [decodedKey]: obj[key] };
-    });
-    return Object.assign({}, ...decodedObj);
+        const val = obj[key];
+        const newVal = decodedObj[decodedKey]
+            ? [...decodedObj[decodedKey], val]
+            : [val];
+        decodedObj = { ...decodedObj, [decodedKey]: newVal };
+    }
+    return decodedObj;
 };
 
 const HeaderModal: React.FC<headerModalProps> = ({
@@ -37,12 +46,12 @@ const HeaderModal: React.FC<headerModalProps> = ({
     position,
     validation,
 }) => {
-    const [flag, Setflag] = useState(false);
-    const [opac, Setopac] = useState(1);
-    const [modalVisible, SetmodalVisible] = useState(false);
-    const [modalVisible2, SetmodalVisible2] = useState(false);
-    const [butname, Setbutname] = useState(1);
-    const [hint, setHint] = useState(-1);
+    const [flag, Setflag] = useState<boolean>(false);
+    const [opac, Setopac] = useState<number>(1);
+    const [modalVisible, SetmodalVisible] = useState<boolean>(false);
+    const [modalVisible2, SetmodalVisible2] = useState<boolean>(false);
+    const [butname, Setbutname] = useState<number>(1);
+    const [hint, setHint] = useState<number>(-1);
 
     const validate = () => {
         Setflag(true);
@@ -50,7 +59,11 @@ const HeaderModal: React.FC<headerModalProps> = ({
         setHint(-1);
         const decodedObj = decodeObj(position.value);
         for (var i = 0; i < validation.length; i++) {
-            if (i != decodedObj[validation[i]]) {
+            if (
+                decodedObj[validation[i]].find(
+                    (value) => value == i.toString()
+                ) === undefined
+            ) {
                 Setflag(false);
                 Setbutname(1);
                 setHint(i);
