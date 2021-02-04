@@ -24,7 +24,7 @@ interface headerModalProps {
 }
 
 interface IDecodedObj {
-    [key: string]: string[];
+    [key: string]: number[];
 }
 
 const decodeObj = (obj) => {
@@ -37,6 +37,7 @@ const decodeObj = (obj) => {
             : [val];
         decodedObj = { ...decodedObj, [decodedKey]: newVal };
     }
+    console.log(decodedObj);
     return decodedObj;
 };
 
@@ -61,7 +62,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
         for (var i = 0; i < validation.length; i++) {
             if (
                 decodedObj[validation[i]].find(
-                    (value) => value == i.toString()
+                    (value) => value == i
                 ) === undefined
             ) {
                 Setflag(false);

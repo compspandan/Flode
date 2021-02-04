@@ -217,10 +217,8 @@ export const problems: IProblem[] = [
             'printyes',
             '}',
             'else',
-            '{',
             'printno',
-            '}',
-            'end',
+            'end'
         ],
         placeHolderDetails: [
             { decision: false },
