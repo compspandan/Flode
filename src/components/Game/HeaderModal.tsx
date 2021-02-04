@@ -47,6 +47,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
     const validate = () => {
         Setflag(true);
         Setbutname(0);
+        setHint(-1);
         const decodedObj = decodeObj(position.value);
         for (var i = 0; i < validation.length; i++) {
             if (i != decodedObj[validation[i]]) {
