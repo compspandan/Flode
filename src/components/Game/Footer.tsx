@@ -3,7 +3,7 @@ import React from 'react';
 import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
 import {
     PanGestureHandler,
-    TouchableNativeFeedback
+    TouchableNativeFeedback,
 } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import { usePanGestureHandler, withSpring } from 'react-native-redash/src/v1';
@@ -34,7 +34,7 @@ const Footer: React.FC<FooterProps> = ({
     onCircleLongPress,
     deleteLastCB,
     cardData,
-    footerIcons
+    footerIcons,
 }) => {
     const {
         gestureHandler,

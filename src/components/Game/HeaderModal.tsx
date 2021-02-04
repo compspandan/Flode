@@ -59,13 +59,24 @@ const HeaderModal: React.FC<headerModalProps> = ({
         }
     };
 
-
     return (
         <>
-            <TouchableOpacity style={styles.button1} onPress={()=>{validate();SetmodalVisible(true);}}>
+            <TouchableOpacity
+                style={styles.button1}
+                onPress={() => {
+                    validate();
+                    SetmodalVisible(true);
+                }}
+            >
                 <Text style={{ color: 'white' }}>Submit</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button2} onPress={()=>{validate();SetmodalVisible2(true)}}>
+            <TouchableOpacity
+                style={styles.button2}
+                onPress={() => {
+                    validate();
+                    SetmodalVisible2(true);
+                }}
+            >
                 <Text style={{ color: 'white' }}>Help</Text>
             </TouchableOpacity>
             <Modal
@@ -168,35 +179,53 @@ const HeaderModal: React.FC<headerModalProps> = ({
                             },
                         ]}
                     >
-                        <Text style={{color:'white',textAlign:'center',fontSize:30,marginTop:WINDOW_HEIGHT/11,fontFamily:'Ubuntu_500Medium',fontWeight: 'bold'}}>Hint</Text>
                         <Text
                             style={{
                                 color: 'white',
                                 textAlign: 'center',
-                                marginTop:10,
+                                fontSize: 30,
+                                marginTop: WINDOW_HEIGHT / 11,
+                                fontFamily: 'Ubuntu_500Medium',
+                                fontWeight: 'bold',
+                            }}
+                        >
+                            Hint
+                        </Text>
+                        <Text
+                            style={{
+                                color: 'white',
+                                textAlign: 'center',
+                                marginTop: 10,
                                 fontSize: 20,
                                 fontFamily: 'Ubuntu_500Medium',
                             }}
                         >
-                            {hint===-1?'No hints required.':'Check Block '+(hint+1)}
+                            {hint === -1
+                                ? 'No hints required.'
+                                : 'Check Block ' + (hint + 1)}
                         </Text>
-                        <View style={{display:'flex',justifyContent:'center',flexDirection:'row',marginTop:55}}>
-                        <TouchableOpacity
+                        <View
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexDirection: 'row',
+                                marginTop: 55,
+                            }}
+                        >
+                            <TouchableOpacity
                                 onPress={() => {
                                     SetmodalVisible2(false);
                                 }}
-                                style={[
-                                    styles.popupbuttons
-                                ]}
+                                style={[styles.popupbuttons]}
                             >
                                 <AntDesign
-                                    name='reload1'
+                                    name="reload1"
                                     size={62}
                                     color="white"
                                     style={{ textAlign: 'center', margin: 6 }}
                                 />
                             </TouchableOpacity>
-                            </View>
+                        </View>
                     </View>
                 </BlurView>
             </Modal>

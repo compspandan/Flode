@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import Animated, {
@@ -14,7 +15,6 @@ import Intermediate from '../components/Game/Intermediate';
 import { Placeholder } from '../components/Placeholder/Placeholder';
 import { IBlockID, ICodeBlock, problems } from '../gameData';
 import { NavProps } from '../ParamList';
-import _ from 'lodash';
 const { height: WINDOW_HEIGHT } = Dimensions.get('window');
 
 const Game: React.FC<NavProps<'Game'>> = ({ navigation, route }) => {
@@ -27,7 +27,7 @@ const Game: React.FC<NavProps<'Game'>> = ({ navigation, route }) => {
         validation,
         desc,
         cardData,
-        footerIcons
+        footerIcons,
     } = problems[level - 1];
 
     useEffect(() => {

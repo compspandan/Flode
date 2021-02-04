@@ -618,18 +618,17 @@ export const problems: IProblem[] = [
             {
                 blockType: 'io',
                 title: 'array<-input',
-                desc:
-                    'Takes input from user and stores input in the array. ',
+                desc: 'Takes input from user and stores input in the array. ',
             },
             {
                 blockType: 'exec',
                 title: 'n <- Length of Array',
-                desc:'Assigns Length of array to variable "n"',
+                desc: 'Assigns Length of array to variable "n"',
             },
             {
                 blockType: 'exec',
                 title: 'sum <- 0',
-                desc:'Assigns zero(0) to variable "sum"',
+                desc: 'Assigns zero(0) to variable "sum"',
             },
             {
                 title: 'Loop i: 0 -> n',
@@ -638,9 +637,9 @@ export const problems: IProblem[] = [
                 blockType: 'loop',
             },
             {
-                title:'sum <- sum / i',
-                blockType:'exec',
-                desc:'Stores the value of sum/i back into sum',
+                title: 'sum <- sum / i',
+                blockType: 'exec',
+                desc: 'Stores the value of sum/i back into sum',
             },
             {
                 blockType: 'io',
@@ -652,7 +651,6 @@ export const problems: IProblem[] = [
                 title: 'END',
                 desc: 'lock to be placed at the end of the flowchart.',
             },
-
         ],
         footerIcons: [
             {
@@ -756,8 +754,7 @@ export const problems: IProblem[] = [
             {
                 blockType: 'io',
                 title: 'array<-input',
-                desc:
-                    'Takes input from user and stores input in the array. ',
+                desc: 'Takes input from user and stores input in the array. ',
             },
         ],
         footerIcons: [],
