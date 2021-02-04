@@ -211,14 +211,14 @@ export const problems: IProblem[] = [
         ],
         validation: [
             'start',
-            'input-i',
+            'input-n',
             'if-n%4',
             '{',
             'printyes',
             '}',
             'else',
             'printno',
-            'end',
+            'end'
         ],
         placeHolderDetails: [
             { decision: false },
