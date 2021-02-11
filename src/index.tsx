@@ -1,15 +1,15 @@
+import { Comfortaa_700Bold, useFonts } from '@expo-google-fonts/comfortaa';
+import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import AppLoading from 'expo-app-loading';
 import React from 'react';
 import 'react-native-gesture-handler';
 import { ParamList } from './ParamList';
-import About from './views/About';
-import Landing from './views/Landing';
-import Levels from './views/Levels';
-import { Comfortaa_700Bold, useFonts } from '@expo-google-fonts/comfortaa';
-import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
-import AppLoading from 'expo-app-loading';
-import Game from './views/Game';
+import About from './screens/About';
+import Game from './screens/Game';
+import Landing from './screens/Landing';
+import Levels from './screens/Levels';
 
 const Stack = createStackNavigator<ParamList>();
 

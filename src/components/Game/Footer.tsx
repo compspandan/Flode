@@ -7,7 +7,7 @@ import {
 } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import { usePanGestureHandler, withSpring } from 'react-native-redash/src/v1';
-import { footerIcons, IBlockID } from '../../gameData';
+import { IBlockID, ICard, IFooterIcon } from '../../gameData';
 import { Block } from '../FlowChart/config';
 import CardDataView from './CardDataView';
 import FooterIcon from './FooterIcon';
@@ -26,9 +26,16 @@ interface FooterProps {
         code: string
     ): void;
     deleteLastCB(): void;
+    footerIcons: IFooterIcon[];
+    cardData: ICard[];
 }
 
-const Footer: React.FC<FooterProps> = ({ onCircleLongPress, deleteLastCB }) => {
+const Footer: React.FC<FooterProps> = ({
+    onCircleLongPress,
+    deleteLastCB,
+    cardData,
+    footerIcons,
+}) => {
     const {
         gestureHandler,
         state,
@@ -88,6 +95,7 @@ const Footer: React.FC<FooterProps> = ({ onCircleLongPress, deleteLastCB }) => {
                 </TouchableNativeFeedback>
             </Animated.View>
             <CardDataView
+                cardData={cardData}
                 translateY={translateY}
                 cardViewHeight={CARD_VIEW_HEIGHT}
             />
