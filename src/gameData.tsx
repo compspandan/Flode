@@ -48,13 +48,14 @@ interface IProblem {
     initBlocks: ICodeBlock[];
     validation: string[];
     placeHolderDetails: IPlaceHolder[];
-    desc?:string;
+    desc?: string;
 }
+
 export const problems: IProblem[] = [
     {
         level: 1,
         problemStatement: 'Find the square of a number.',
-        desc:'Find the square of a number using multiplication.',
+        desc: 'Find the square of a number using multiplication.',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '0x0' },
             {
@@ -89,7 +90,7 @@ export const problems: IProblem[] = [
     {
         level: 2,
         problemStatement: 'Check if number is a multiple of 4.',
-        desc:'Using modulo operator find if a number is a multiple of 4',
+        desc: 'Using modulo operator find if a number is a multiple of 4',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '893' },
             {
@@ -153,7 +154,7 @@ export const problems: IProblem[] = [
         level: 3,
         problemStatement:
             'Swap lowercase characters to uppercase and uppercase to lowercase.',
-        desc:'Using loops and conditional statements try to swap characters.',
+        desc: 'Using loops and conditional statements try to swap characters.',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: 'kom' },
             {
@@ -239,7 +240,7 @@ export const problems: IProblem[] = [
     {
         level: 4,
         problemStatement: 'Find the average of all elements in a list.',
-        desc:'Use a loop control flow to access the ith element of a list.',
+        desc: 'Use a loop control flow to access the ith element of a list.',
         initBlocks: [
             {
                 blockType: 'start',
@@ -444,4 +445,109 @@ export const footerIcons: IFooterIcon[] = [
         blockID: 'loop-i-0-n',
         code: 'Loop i: 0 -> n',
     },
+];
+
+export const levelData= [
+    [
+        {
+            desc: 'Intro',
+            num: 1,
+            locked: false,
+        },
+        {
+            desc: 'Input / Output',
+            num: 2,
+            locked: false,
+        },
+        {
+            desc: 'Conditionals',
+            num: 3,
+            locked: false,
+        },
+    ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: false,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: false,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: false,
+        },
+    ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: true,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: true,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: true,
+        },
+    ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: true,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: true,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: true,
+        },
+    ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: true,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: true,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: true,
+        },
+    ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: true,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: true,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: true,
+        },
+    ],
 ];
