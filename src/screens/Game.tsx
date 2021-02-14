@@ -8,7 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CodeBlock from '../components/FlowChart/CodeBlock';
-import { Block, positionInterface } from '../components/FlowChart/config';
+import { Block, IPosition } from '../components/FlowChart/config';
 import Footer, { TOTAL_FOOTER_HEIGHT } from '../components/Game/Footer';
 import HeaderModal from '../components/Game/HeaderModal';
 import Intermediate from '../components/Game/Intermediate';
@@ -72,7 +72,7 @@ const Game: React.FC<NavProps<'Game'>> = ({ navigation, route }) => {
         })
     );
 
-    const position = useSharedValue<positionInterface>(cBPos);
+    const position = useSharedValue<IPosition>(cBPos);
 
     const onCircleLongPress = (
         blockType: keyof Block,

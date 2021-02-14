@@ -13,7 +13,7 @@ export type CodeBlockProps = {
     code: String;
     blockType: keyof Block;
     id: string;
-    positions: Animated.SharedValue<positionInterface>;
+    positions: Animated.SharedValue<IPosition>;
     scrollView: React.RefObject<Animated.ScrollView>;
     scrollY: Animated.SharedValue<number>;
 };
@@ -27,7 +27,7 @@ export const colors = {
     loop: ['#093028', '#237a57'],
 };
 
-export interface positionInterface {
+export interface IPosition {
     [id: string]: number;
 }
 

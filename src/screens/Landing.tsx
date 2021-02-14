@@ -4,76 +4,74 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    View
+    View,
 } from 'react-native';
 import Svg, { Ellipse, SvgXml } from 'react-native-svg';
-import imagesvg from '../components/ArcSVG';
+import imagesvg from '../components/SVGs/ArcSVG';
 import { NavProps } from '../ParamList';
 
-const { width, height } = Dimensions.get('window');
+const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
-const Landing: React.FC<NavProps<'Landing'>> = ({ navigation }) => {
-    return (
-        <View style={{ height }}>
-            <View style={{ flex: 1, backgroundColor: '#E5E5E5' }}>
-                <Text
-                    style={{
-                        textAlign: 'center',
-                        fontSize: 50,
-                        fontFamily: 'Comfortaa_700Bold',
-                        marginTop: height / 10,
-                    }}
-                >
-                    Flode
-                </Text>
-            </View>
-            <Svg
-                height={height / 3}
-                width={width}
-                style={{ flex: 1, backgroundColor: '#E5E5E5' }}
-            >
-                <SvgXml
-                    xml={imagesvg}
-                    width="100%"
-                    height="100%"
-                    x={width / 2}
-                />
-            </Svg>
-            <Svg
-                height={height / 2.6}
-                width={width}
-                style={{ flex: 1, backgroundColor: '#E5E5E5' }}
-            >
-                <Ellipse
-                    cx={width / 2}
-                    cy={height / 2}
-                    rx="500"
-                    ry="300"
-                    fill="#16213e"
-                />
-            </Svg>
-            <TouchableOpacity
-                style={styles.button1}
-                onPress={() => navigation.push('Levels')}
-            >
-                <Text style={{ color: 'white' }}>Play</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.button2}
-                onPress={() => navigation.push('About')}
-            >
-                <Text style={{ color: 'white' }}>About Us</Text>
-            </TouchableOpacity>
+const Landing: React.FC<NavProps<'Landing'>> = ({ navigation }) => (
+    <View style={styles.mainContainer}>
+        <View style={styles.svg}>
+            <Text style={styles.header}>Flode</Text>
         </View>
-    );
-};
+        <Svg
+            height={HEIGHT / 3}
+            width={WIDTH}
+            style={styles.svg}
+        >
+            <SvgXml xml={imagesvg} width="100%" height="100%" x={WIDTH / 2} />
+        </Svg>
+        <Svg
+            height={HEIGHT / 2.6}
+            width={WIDTH}
+            style={styles.svg}
+        >
+            <Ellipse
+                cx={WIDTH / 2}
+                cy={HEIGHT / 2}
+                rx="500"
+                ry="300"
+                fill="#16213e"
+            />
+        </Svg>
+        <TouchableOpacity
+            style={styles.playButton}
+            onPress={() => navigation.push('Levels')}
+        >
+            <Text style={{ color: 'white' }}>Play</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+            style={styles.aboutButton}
+            onPress={() => navigation.push('About')}
+        >
+            <Text style={{ color: 'white' }}>About Us</Text>
+        </TouchableOpacity>
+    </View>
+);
+
 const styles = StyleSheet.create({
-    button1: {
+    mainContainer: {
+        height: HEIGHT,
+    },
+    svg: {
+        flex: 1,
+        backgroundColor: '#E5E5E5',
+    },
+    header: {
+        textAlign: 'center',
+        fontSize: 50,
+        fontFamily: 'Comfortaa_700Bold',
+        marginTop: HEIGHT / 10,
+    },
+    playButton: {
         height: 52,
         width: 170,
         position: 'absolute',
-        left: width / 3.22,
-        top: height / 1.25,
+        left: WIDTH / 3.22,
+        top: HEIGHT / 1.25,
         borderRadius: 15,
         borderWidth: 2,
         borderColor: 'white',
@@ -81,12 +79,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    button2: {
+    aboutButton: {
         height: 52,
         width: 170,
         position: 'absolute',
-        left: width / 3.22,
-        top: height / 1.12,
+        left: WIDTH / 3.22,
+        top: HEIGHT / 1.12,
         borderRadius: 15,
         alignSelf: 'center',
         alignItems: 'center',

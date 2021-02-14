@@ -12,14 +12,14 @@ import {
 } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { ParamList } from '../../ParamList';
-import { positionInterface } from '../FlowChart/config';
+import { IPosition } from '../FlowChart/config';
 
 const { height: WINDOW_HEIGHT, width: WINDOW_WIDTH } = Dimensions.get('window');
 
 interface headerModalProps {
     level: number;
     navigation: StackNavigationProp<ParamList, 'Game'>;
-    position: Animated.SharedValue<positionInterface>;
+    position: Animated.SharedValue<IPosition>;
     validation: string[];
 }
 
@@ -37,7 +37,6 @@ const decodeObj = (obj) => {
             : [val];
         decodedObj = { ...decodedObj, [decodedKey]: newVal };
     }
-    console.log(decodedObj);
     return decodedObj;
 };
 
@@ -47,26 +46,25 @@ const HeaderModal: React.FC<headerModalProps> = ({
     position,
     validation,
 }) => {
-    const [flag, Setflag] = useState<boolean>(false);
-    const [opac, Setopac] = useState<number>(1);
-    const [modalVisible, SetmodalVisible] = useState<boolean>(false);
-    const [modalVisible2, SetmodalVisible2] = useState<boolean>(false);
-    const [butname, Setbutname] = useState<number>(1);
+    const [flag, setFlag] = useState<boolean>(false);
+    const [opac, setOpac] = useState<number>(1);
+    const [submitModalVisible, setSubmitModal] = useState<boolean>(false);
+    const [hintModalVisible, setHintModal] = useState<boolean>(false);
+    const [buttonName, setButtonName] = useState<boolean>(true);
     const [hint, setHint] = useState<number>(-1);
 
     const validate = () => {
-        Setflag(true);
-        Setbutname(0);
+        setFlag(true);
+        setButtonName(false);
         setHint(-1);
         const decodedObj = decodeObj(position.value);
         for (var i = 0; i < validation.length; i++) {
             if (
-                decodedObj[validation[i]].find(
-                    (value) => value == i
-                ) === undefined
+                decodedObj[validation[i]].find((value) => value == i) ===
+                undefined
             ) {
-                Setflag(false);
-                Setbutname(1);
+                setFlag(false);
+                setButtonName(true);
                 setHint(i);
                 break;
             }
@@ -76,19 +74,19 @@ const HeaderModal: React.FC<headerModalProps> = ({
     return (
         <>
             <TouchableOpacity
-                style={styles.button1}
+                style={styles.submitButton}
                 onPress={() => {
                     validate();
-                    SetmodalVisible(true);
+                    setSubmitModal(true);
                 }}
             >
                 <Text style={{ color: 'white' }}>Submit</Text>
             </TouchableOpacity>
             <TouchableOpacity
-                style={styles.button2}
+                style={styles.hintButton}
                 onPress={() => {
                     validate();
-                    SetmodalVisible2(true);
+                    setHintModal(true);
                 }}
             >
                 <Text style={{ color: 'white' }}>Help</Text>
@@ -96,7 +94,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
             <Modal
                 animationType="none"
                 transparent={true}
-                visible={modalVisible}
+                visible={submitModalVisible}
             >
                 <BlurView intensity={100 * opac}>
                     <View
@@ -104,8 +102,6 @@ const HeaderModal: React.FC<headerModalProps> = ({
                             styles.popup,
                             {
                                 opacity: opac,
-                                borderRadius: 20,
-                                display: 'flex',
                             },
                         ]}
                     >
@@ -131,10 +127,10 @@ const HeaderModal: React.FC<headerModalProps> = ({
                         >
                             <TouchableOpacity
                                 onPress={() => {
-                                    Setopac(0), navigation.pop();
+                                    setOpac(0), navigation.pop();
                                 }}
                                 style={[
-                                    styles.popupbuttons,
+                                    styles.popupButton,
                                     {
                                         margin: 20,
                                         marginLeft: WINDOW_WIDTH / 8,
@@ -151,15 +147,15 @@ const HeaderModal: React.FC<headerModalProps> = ({
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => {
-                                    butname
-                                        ? SetmodalVisible(false)
+                                    buttonName
+                                        ? setSubmitModal(false)
                                         : navigation.replace('Game', {
                                               level: level + 1,
                                           });
-                                    SetmodalVisible(false);
+                                    setSubmitModal(false);
                                 }}
                                 style={[
-                                    styles.popupbuttons,
+                                    styles.popupButton,
                                     {
                                         margin: 20,
                                         marginRight: WINDOW_WIDTH / 8,
@@ -167,7 +163,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
                                 ]}
                             >
                                 <AntDesign
-                                    name={butname ? 'reload1' : 'caretright'}
+                                    name={buttonName ? 'reload1' : 'caretright'}
                                     size={62}
                                     color="white"
                                     style={{ textAlign: 'center', margin: 6 }}
@@ -180,7 +176,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
             <Modal
                 animationType="none"
                 transparent={true}
-                visible={modalVisible2}
+                visible={hintModalVisible}
             >
                 <BlurView intensity={100 * opac}>
                     <View
@@ -188,8 +184,6 @@ const HeaderModal: React.FC<headerModalProps> = ({
                             styles.popup,
                             {
                                 opacity: opac,
-                                borderRadius: 20,
-                                display: 'flex',
                             },
                         ]}
                     >
@@ -227,10 +221,8 @@ const HeaderModal: React.FC<headerModalProps> = ({
                             }}
                         >
                             <TouchableOpacity
-                                onPress={() => {
-                                    SetmodalVisible2(false);
-                                }}
-                                style={[styles.popupbuttons]}
+                                onPress={() => setHintModal(false)}
+                                style={styles.popupButton}
                             >
                                 <AntDesign
                                     name="reload1"
@@ -248,12 +240,36 @@ const HeaderModal: React.FC<headerModalProps> = ({
 };
 
 const styles = StyleSheet.create({
-    button1: {
+    submitButton: {
         height: 50,
         width: 75,
         position: 'absolute',
         left: WINDOW_WIDTH / 1.25,
         top: WINDOW_HEIGHT / 14,
+        borderRadius: 14,
+        borderWidth: 2,
+        borderColor: '#e94560',
+        backgroundColor: '#e94560',
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    popupButton: {
+        width: 80,
+        height: 80,
+        alignItems: 'center',
+        borderRadius: 18,
+        borderWidth: 2,
+        textAlign: 'center',
+        backgroundColor: '#e94560',
+        borderColor: '#e94560',
+    },
+    hintButton: {
+        height: 50,
+        width: 75,
+        position: 'absolute',
+        left: WINDOW_WIDTH / 38,
+        top: WINDOW_HEIGHT / 1.15,
         borderRadius: 14,
         borderWidth: 2,
         borderColor: '#e94560',
@@ -277,30 +293,8 @@ const styles = StyleSheet.create({
         marginTop: WINDOW_HEIGHT / 4.2,
         marginBottom: WINDOW_HEIGHT / 3.8,
         marginLeft: WINDOW_WIDTH / 8,
-    },
-    popupbuttons: {
-        width: 80,
-        height: 80,
-        alignItems: 'center',
-        borderRadius: 18,
-        borderWidth: 2,
-        textAlign: 'center',
-        backgroundColor: '#e94560',
-        borderColor: '#e94560',
-    },
-    button2: {
-        height: 50,
-        width: 75,
-        position: 'absolute',
-        left: WINDOW_WIDTH / 38,
-        top: WINDOW_HEIGHT / 1.15,
-        borderRadius: 14,
-        borderWidth: 2,
-        borderColor: '#e94560',
-        backgroundColor: '#e94560',
-        alignSelf: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
+        borderRadius: 20,
+        display: 'flex',
     },
 });
 
