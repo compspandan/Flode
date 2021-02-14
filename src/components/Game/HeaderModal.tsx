@@ -60,8 +60,9 @@ const HeaderModal: React.FC<headerModalProps> = ({
         const decodedObj = decodeObj(position.value);
         for (var i = 0; i < validation.length; i++) {
             if (
+                decodedObj[validation[i]] === undefined ||
                 decodedObj[validation[i]].find((value) => value == i) ===
-                undefined
+                    undefined
             ) {
                 setFlag(false);
                 setButtonName(true);

@@ -538,7 +538,7 @@ export const problems: IProblem[] = [
             },
             {
                 blockType: 'io',
-                title: 'String<-input',
+                title: 'String <- input',
                 desc:
                     'Takes input from user. Stores input in variable String. ',
             },
