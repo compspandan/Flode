@@ -81,7 +81,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
                     setSubmitModal(true);
                 }}
             >
-                <Text style={{ color: 'white' }}>Submit</Text>
+                <Text style={styles.white}>Submit</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={styles.hintButton}
@@ -90,7 +90,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
                     setHintModal(true);
                 }}
             >
-                <Text style={{ color: 'white' }}>Help</Text>
+                <Text style={styles.white}>Help</Text>
             </TouchableOpacity>
             <Modal
                 animationType="none"
@@ -106,26 +106,10 @@ const HeaderModal: React.FC<headerModalProps> = ({
                             },
                         ]}
                     >
-                        <Text
-                            style={{
-                                color: 'white',
-                                textAlign: 'center',
-                                fontSize: 40,
-                                marginTop: WINDOW_HEIGHT / 11,
-                                fontFamily: 'Ubuntu_500Medium',
-                                fontWeight: 'bold',
-                            }}
-                        >
+                        <Text style={styles.subtmitDescription}>
                             {flag ? 'Level Cleared!!' : 'Wrong Answer'}
                         </Text>
-                        <View
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'center',
-                                marginTop: WINDOW_HEIGHT / 9,
-                            }}
-                        >
+                        <View style={styles.submitButtonContainer}>
                             <TouchableOpacity
                                 onPress={() => {
                                     setOpac(0), navigation.pop();
@@ -143,7 +127,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
                                     name="list"
                                     size={60}
                                     color="white"
-                                    style={{ textAlign: 'center', margin: 5 }}
+                                    style={styles.icon}
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity
@@ -167,7 +151,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
                                     name={buttonName ? 'reload1' : 'caretright'}
                                     size={62}
                                     color="white"
-                                    style={{ textAlign: 'center', margin: 6 }}
+                                    style={styles.icon}
                                 />
                             </TouchableOpacity>
                         </View>
@@ -188,39 +172,13 @@ const HeaderModal: React.FC<headerModalProps> = ({
                             },
                         ]}
                     >
-                        <Text
-                            style={{
-                                color: 'white',
-                                textAlign: 'center',
-                                fontSize: 30,
-                                marginTop: WINDOW_HEIGHT / 11,
-                                fontFamily: 'Ubuntu_500Medium',
-                                fontWeight: 'bold',
-                            }}
-                        >
-                            Hint
-                        </Text>
-                        <Text
-                            style={{
-                                color: 'white',
-                                textAlign: 'center',
-                                marginTop: 10,
-                                fontSize: 20,
-                                fontFamily: 'Ubuntu_500Medium',
-                            }}
-                        >
+                        <Text style={styles.hintText}>Hint</Text>
+                        <Text style={styles.hintDescription}>
                             {hint === -1
                                 ? 'No hints required.'
                                 : 'Check Block ' + (hint + 1)}
                         </Text>
-                        <View
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                flexDirection: 'row',
-                                marginTop: 55,
-                            }}
-                        >
+                        <View style={styles.hintButtonContainer}>
                             <TouchableOpacity
                                 onPress={() => setHintModal(false)}
                                 style={styles.popupButton}
@@ -229,7 +187,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
                                     name="reload1"
                                     size={62}
                                     color="white"
-                                    style={{ textAlign: 'center', margin: 6 }}
+                                    style={styles.icon}
                                 />
                             </TouchableOpacity>
                         </View>
@@ -241,6 +199,9 @@ const HeaderModal: React.FC<headerModalProps> = ({
 };
 
 const styles = StyleSheet.create({
+    white: {
+        color: '#fff',
+    },
     submitButton: {
         height: 50,
         width: 75,
@@ -296,6 +257,45 @@ const styles = StyleSheet.create({
         marginLeft: WINDOW_WIDTH / 8,
         borderRadius: 20,
         display: 'flex',
+    },
+    icon: {
+        textAlign: 'center',
+        margin: 6,
+    },
+    hintButtonContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        marginTop: 55,
+    },
+    submitButtonContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: WINDOW_HEIGHT / 9,
+    },
+    subtmitDescription: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 40,
+        marginTop: WINDOW_HEIGHT / 11,
+        fontFamily: 'Ubuntu_500Medium',
+        fontWeight: 'bold',
+    },
+    hintText: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 30,
+        marginTop: WINDOW_HEIGHT / 11,
+        fontFamily: 'Ubuntu_500Medium',
+        fontWeight: 'bold',
+    },
+    hintDescription: {
+        color: 'white',
+        textAlign: 'center',
+        marginTop: 10,
+        fontSize: 20,
+        fontFamily: 'Ubuntu_500Medium',
     },
 });
 
