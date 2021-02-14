@@ -12,14 +12,14 @@ import {
 } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { ParamList } from '../../ParamList';
-import { positionInterface } from '../FlowChart/config';
+import { IPosition } from '../FlowChart/config';
 
 const { height: WINDOW_HEIGHT, width: WINDOW_WIDTH } = Dimensions.get('window');
 
 interface headerModalProps {
     level: number;
     navigation: StackNavigationProp<ParamList, 'Game'>;
-    position: Animated.SharedValue<positionInterface>;
+    position: Animated.SharedValue<IPosition>;
     validation: string[];
 }
 
@@ -37,7 +37,6 @@ const decodeObj = (obj) => {
             : [val];
         decodedObj = { ...decodedObj, [decodedKey]: newVal };
     }
-    console.log(decodedObj);
     return decodedObj;
 };
 
@@ -47,26 +46,26 @@ const HeaderModal: React.FC<headerModalProps> = ({
     position,
     validation,
 }) => {
-    const [flag, Setflag] = useState<boolean>(false);
-    const [opac, Setopac] = useState<number>(1);
-    const [modalVisible, SetmodalVisible] = useState<boolean>(false);
-    const [modalVisible2, SetmodalVisible2] = useState<boolean>(false);
-    const [butname, Setbutname] = useState<number>(1);
+    const [flag, setFlag] = useState<boolean>(false);
+    const [opac, setOpac] = useState<number>(1);
+    const [submitModalVisible, setSubmitModal] = useState<boolean>(false);
+    const [hintModalVisible, setHintModal] = useState<boolean>(false);
+    const [buttonName, setButtonName] = useState<boolean>(true);
     const [hint, setHint] = useState<number>(-1);
 
     const validate = () => {
-        Setflag(true);
-        Setbutname(0);
+        setFlag(true);
+        setButtonName(false);
         setHint(-1);
         const decodedObj = decodeObj(position.value);
         for (var i = 0; i < validation.length; i++) {
             if (
-                decodedObj[validation[i]].find(
-                    (value) => value == i
-                ) === undefined
+                decodedObj[validation[i]] === undefined ||
+                decodedObj[validation[i]].find((value) => value == i) ===
+                    undefined
             ) {
-                Setflag(false);
-                Setbutname(1);
+                setFlag(false);
+                setButtonName(true);
                 setHint(i);
                 break;
             }
@@ -76,27 +75,27 @@ const HeaderModal: React.FC<headerModalProps> = ({
     return (
         <>
             <TouchableOpacity
-                style={styles.button1}
+                style={styles.submitButton}
                 onPress={() => {
                     validate();
-                    SetmodalVisible(true);
+                    setSubmitModal(true);
                 }}
             >
-                <Text style={{ color: 'white' }}>Submit</Text>
+                <Text style={styles.white}>Submit</Text>
             </TouchableOpacity>
             <TouchableOpacity
-                style={styles.button2}
+                style={styles.hintButton}
                 onPress={() => {
                     validate();
-                    SetmodalVisible2(true);
+                    setHintModal(true);
                 }}
             >
-                <Text style={{ color: 'white' }}>Help</Text>
+                <Text style={styles.white}>Help</Text>
             </TouchableOpacity>
             <Modal
                 animationType="none"
                 transparent={true}
-                visible={modalVisible}
+                visible={submitModalVisible}
             >
                 <BlurView intensity={100 * opac}>
                     <View
@@ -104,37 +103,19 @@ const HeaderModal: React.FC<headerModalProps> = ({
                             styles.popup,
                             {
                                 opacity: opac,
-                                borderRadius: 20,
-                                display: 'flex',
                             },
                         ]}
                     >
-                        <Text
-                            style={{
-                                color: 'white',
-                                textAlign: 'center',
-                                fontSize: 40,
-                                marginTop: WINDOW_HEIGHT / 11,
-                                fontFamily: 'Ubuntu_500Medium',
-                                fontWeight: 'bold',
-                            }}
-                        >
+                        <Text style={styles.subtmitDescription}>
                             {flag ? 'Level Cleared!!' : 'Wrong Answer'}
                         </Text>
-                        <View
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'center',
-                                marginTop: WINDOW_HEIGHT / 9,
-                            }}
-                        >
+                        <View style={styles.submitButtonContainer}>
                             <TouchableOpacity
                                 onPress={() => {
-                                    Setopac(0), navigation.pop();
+                                    setOpac(0), navigation.pop();
                                 }}
                                 style={[
-                                    styles.popupbuttons,
+                                    styles.popupButton,
                                     {
                                         margin: 20,
                                         marginLeft: WINDOW_WIDTH / 8,
@@ -146,20 +127,20 @@ const HeaderModal: React.FC<headerModalProps> = ({
                                     name="list"
                                     size={60}
                                     color="white"
-                                    style={{ textAlign: 'center', margin: 5 }}
+                                    style={styles.icon}
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => {
-                                    butname
-                                        ? SetmodalVisible(false)
+                                    buttonName
+                                        ? setSubmitModal(false)
                                         : navigation.replace('Game', {
                                               level: level + 1,
                                           });
-                                    SetmodalVisible(false);
+                                    setSubmitModal(false);
                                 }}
                                 style={[
-                                    styles.popupbuttons,
+                                    styles.popupButton,
                                     {
                                         margin: 20,
                                         marginRight: WINDOW_WIDTH / 8,
@@ -167,10 +148,10 @@ const HeaderModal: React.FC<headerModalProps> = ({
                                 ]}
                             >
                                 <AntDesign
-                                    name={butname ? 'reload1' : 'caretright'}
+                                    name={buttonName ? 'reload1' : 'caretright'}
                                     size={62}
                                     color="white"
-                                    style={{ textAlign: 'center', margin: 6 }}
+                                    style={styles.icon}
                                 />
                             </TouchableOpacity>
                         </View>
@@ -180,7 +161,7 @@ const HeaderModal: React.FC<headerModalProps> = ({
             <Modal
                 animationType="none"
                 transparent={true}
-                visible={modalVisible2}
+                visible={hintModalVisible}
             >
                 <BlurView intensity={100 * opac}>
                     <View
@@ -188,55 +169,25 @@ const HeaderModal: React.FC<headerModalProps> = ({
                             styles.popup,
                             {
                                 opacity: opac,
-                                borderRadius: 20,
-                                display: 'flex',
                             },
                         ]}
                     >
-                        <Text
-                            style={{
-                                color: 'white',
-                                textAlign: 'center',
-                                fontSize: 30,
-                                marginTop: WINDOW_HEIGHT / 11,
-                                fontFamily: 'Ubuntu_500Medium',
-                                fontWeight: 'bold',
-                            }}
-                        >
-                            Hint
-                        </Text>
-                        <Text
-                            style={{
-                                color: 'white',
-                                textAlign: 'center',
-                                marginTop: 10,
-                                fontSize: 20,
-                                fontFamily: 'Ubuntu_500Medium',
-                            }}
-                        >
+                        <Text style={styles.hintText}>Hint</Text>
+                        <Text style={styles.hintDescription}>
                             {hint === -1
                                 ? 'No hints required.'
                                 : 'Check Block ' + (hint + 1)}
                         </Text>
-                        <View
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                flexDirection: 'row',
-                                marginTop: 55,
-                            }}
-                        >
+                        <View style={styles.hintButtonContainer}>
                             <TouchableOpacity
-                                onPress={() => {
-                                    SetmodalVisible2(false);
-                                }}
-                                style={[styles.popupbuttons]}
+                                onPress={() => setHintModal(false)}
+                                style={styles.popupButton}
                             >
                                 <AntDesign
                                     name="reload1"
                                     size={62}
                                     color="white"
-                                    style={{ textAlign: 'center', margin: 6 }}
+                                    style={styles.icon}
                                 />
                             </TouchableOpacity>
                         </View>
@@ -248,12 +199,39 @@ const HeaderModal: React.FC<headerModalProps> = ({
 };
 
 const styles = StyleSheet.create({
-    button1: {
+    white: {
+        color: '#fff',
+    },
+    submitButton: {
         height: 50,
         width: 75,
         position: 'absolute',
         left: WINDOW_WIDTH / 1.25,
         top: WINDOW_HEIGHT / 14,
+        borderRadius: 14,
+        borderWidth: 2,
+        borderColor: '#e94560',
+        backgroundColor: '#e94560',
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    popupButton: {
+        width: 80,
+        height: 80,
+        alignItems: 'center',
+        borderRadius: 18,
+        borderWidth: 2,
+        textAlign: 'center',
+        backgroundColor: '#e94560',
+        borderColor: '#e94560',
+    },
+    hintButton: {
+        height: 50,
+        width: 75,
+        position: 'absolute',
+        left: WINDOW_WIDTH / 38,
+        top: WINDOW_HEIGHT / 1.15,
         borderRadius: 14,
         borderWidth: 2,
         borderColor: '#e94560',
@@ -277,30 +255,47 @@ const styles = StyleSheet.create({
         marginTop: WINDOW_HEIGHT / 4.2,
         marginBottom: WINDOW_HEIGHT / 3.8,
         marginLeft: WINDOW_WIDTH / 8,
+        borderRadius: 20,
+        display: 'flex',
     },
-    popupbuttons: {
-        width: 80,
-        height: 80,
-        alignItems: 'center',
-        borderRadius: 18,
-        borderWidth: 2,
+    icon: {
         textAlign: 'center',
-        backgroundColor: '#e94560',
-        borderColor: '#e94560',
+        margin: 6,
     },
-    button2: {
-        height: 50,
-        width: 75,
-        position: 'absolute',
-        left: WINDOW_WIDTH / 38,
-        top: WINDOW_HEIGHT / 1.15,
-        borderRadius: 14,
-        borderWidth: 2,
-        borderColor: '#e94560',
-        backgroundColor: '#e94560',
-        alignSelf: 'center',
-        alignItems: 'center',
+    hintButtonContainer: {
+        display: 'flex',
         justifyContent: 'center',
+        flexDirection: 'row',
+        marginTop: 55,
+    },
+    submitButtonContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: WINDOW_HEIGHT / 9,
+    },
+    subtmitDescription: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 40,
+        marginTop: WINDOW_HEIGHT / 11,
+        fontFamily: 'Ubuntu_500Medium',
+        fontWeight: 'bold',
+    },
+    hintText: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 30,
+        marginTop: WINDOW_HEIGHT / 11,
+        fontFamily: 'Ubuntu_500Medium',
+        fontWeight: 'bold',
+    },
+    hintDescription: {
+        color: 'white',
+        textAlign: 'center',
+        marginTop: 10,
+        fontSize: 20,
+        fontFamily: 'Ubuntu_500Medium',
     },
 });
 

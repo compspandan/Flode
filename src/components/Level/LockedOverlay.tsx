@@ -12,24 +12,17 @@ interface LockedOverlayProps {
 const LockedOverlay: React.FC<LockedOverlayProps> = ({
     visible,
     toggleOverlay,
-}) => {
-    return (
-        <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-            <View style={styles.container}>
-                <Text style={styles.title}>This level is locked!</Text>
-                <Text>
-                    To unlock this level, please complete all the previous
-                    levels.
-                </Text>
-                <Button
-                    color="#e94560"
-                    onPress={toggleOverlay}
-                    title="Go Back"
-                />
-            </View>
-        </Overlay>
-    );
-};
+}) => (
+    <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+        <View style={styles.container}>
+            <Text style={styles.title}>This level is locked!</Text>
+            <Text>
+                To unlock this level, please complete all the previous levels.
+            </Text>
+            <Button color="#e94560" onPress={toggleOverlay} title="Go Back" />
+        </View>
+    </Overlay>
+);
 
 const styles = StyleSheet.create({
     container: {

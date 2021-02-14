@@ -10,121 +10,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../components/Level/Header';
 import LevelBox from '../components/Level/LevelBox';
 import LockedOverlay from '../components/Level/LockedOverlay';
+import { levelData } from '../gameData';
 import { NavProps } from '../ParamList';
 
 const { height } = Dimensions.get('screen');
 
-const levelData = [
-    [
-        {
-            desc: 'Intro',
-            num: 1,
-            locked: false,
-        },
-        {
-            desc: 'Input / Output',
-            num: 2,
-            locked: false,
-        },
-        {
-            desc: 'Conditionals',
-            num: 3,
-            locked: false,
-        },
-    ],
-    [
-        {
-            desc: 'Intro',
-            num: 4,
-            locked: false,
-        },
-        {
-            desc: 'Input / Output',
-            num: 5,
-            locked: false,
-        },
-        {
-            desc: 'Conditionals',
-            num: 6,
-            locked: false,
-        },
-    ],
-    [
-        {
-            desc: 'Intro',
-            num: 4,
-            locked: true,
-        },
-        {
-            desc: 'Input / Output',
-            num: 5,
-            locked: true,
-        },
-        {
-            desc: 'Conditionals',
-            num: 6,
-            locked: true,
-        },
-    ],
-    [
-        {
-            desc: 'Intro',
-            num: 4,
-            locked: true,
-        },
-        {
-            desc: 'Input / Output',
-            num: 5,
-            locked: true,
-        },
-        {
-            desc: 'Conditionals',
-            num: 6,
-            locked: true,
-        },
-    ],
-    [
-        {
-            desc: 'Intro',
-            num: 4,
-            locked: true,
-        },
-        {
-            desc: 'Input / Output',
-            num: 5,
-            locked: true,
-        },
-        {
-            desc: 'Conditionals',
-            num: 6,
-            locked: true,
-        },
-    ],
-    [
-        {
-            desc: 'Intro',
-            num: 4,
-            locked: true,
-        },
-        {
-            desc: 'Input / Output',
-            num: 5,
-            locked: true,
-        },
-        {
-            desc: 'Conditionals',
-            num: 6,
-            locked: true,
-        },
-    ],
-];
-
 const Levels: React.FC<NavProps<'Levels'>> = ({ navigation }) => {
     const [visible, setVisible] = useState(false);
-
-    const toggleOverlay = () => {
-        setVisible(!visible);
-    };
+    const toggleOverlay = () => setVisible(!visible);
 
     return (
         <SafeAreaView>

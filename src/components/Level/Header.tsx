@@ -8,24 +8,22 @@ interface HeaderProps {
     goBack: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ goBack }) => {
-    return (
-        <View style={styles.header}>
-            <View style={styles.btnContainer}>
-                <AntDesign
-                    name="arrowleft"
-                    size={36}
-                    color="black"
-                    style={styles.backBtn}
-                    onPress={goBack}
-                />
-            </View>
-            <View style={styles.textContainer}>
-                <Text style={styles.text}>Levels</Text>
-            </View>
+const Header: React.FC<HeaderProps> = ({ goBack }) => (
+    <View style={styles.header}>
+        <View style={styles.btnContainer}>
+            <AntDesign
+                name="arrowleft"
+                size={36}
+                color="black"
+                style={styles.backBtn}
+                onPress={goBack}
+            />
         </View>
-    );
-};
+        <View style={styles.textContainer}>
+            <Text style={styles.text}>Levels</Text>
+        </View>
+    </View>
+);
 
 const styles = StyleSheet.create({
     header: {

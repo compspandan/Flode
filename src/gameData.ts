@@ -1,4 +1,11 @@
 import { Block } from './components/FlowChart/config';
+import {
+    MaterialCommunityIcons,
+    MaterialIcons,
+    Feather,
+    Entypo,
+    AntDesign,
+} from '@expo/vector-icons';
 
 export interface IBlockID {
     start: string;
@@ -32,6 +39,123 @@ export interface IBlockID {
     'input-n': string;
     'y-x*x': string;
 }
+
+export const BlockID2Icon = {
+    start: {
+        icon: MaterialCommunityIcons,
+        name: 'adjust',
+    },
+    end: {
+        icon: MaterialCommunityIcons,
+        name: 'adjust',
+    },
+    'init-sum-0': {
+        icon: MaterialCommunityIcons,
+        name: 'equal',
+    },
+    'input-arr': {
+        icon: MaterialCommunityIcons,
+        name: 'code-array',
+    },
+    'loop-i-0-n': {
+        icon: Entypo,
+        name: 'loop',
+    },
+    'init-n-len-arr': {
+        icon: MaterialCommunityIcons,
+        name: 'equal',
+    },
+    'add-i-to-sum': {
+        icon: MaterialIcons,
+        name: 'add',
+    },
+    'display-sum': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    'divide-sum-by-n': {
+        icon: Feather,
+        name: 'divide',
+    },
+    'input-x': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-left',
+    },
+    'multiply-x': { icon: Feather, name: 'x' },
+    'print-x': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    '}': {
+        icon: MaterialCommunityIcons,
+        name: 'code-brackets',
+    },
+    '{': {
+        icon: MaterialCommunityIcons,
+        name: 'code-brackets',
+    },
+    'print-s': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    's[i]-lower': {
+        icon: MaterialCommunityIcons,
+        name: 'equal',
+    },
+    else: {
+        icon: AntDesign,
+        name: 'question',
+    },
+    's[i]-upper': {
+        icon: MaterialCommunityIcons,
+        name: 'equal',
+    },
+    'if-x.lower': {
+        icon: AntDesign,
+        name: 'question',
+    },
+    'input-s': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-left',
+    },
+    printno: {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    printyes: {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    'input-i': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-left',
+    },
+    'if-n%4': {
+        icon: AntDesign,
+        name: 'question',
+    },
+    'if-j-a[i]': {
+        icon: AntDesign,
+        name: 'question',
+    },
+    'print-j': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    'init-j': {
+        icon: MaterialCommunityIcons,
+        name: 'equal',
+    },
+    'display-y': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    'input-n': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-left',
+    },
+    'y-x*x': { icon: Feather, name: 'x' },
+};
 
 export interface ICodeBlock {
     blockType: keyof Block;
@@ -125,12 +249,6 @@ export const problems: IProblem[] = [
                 blockType: 'io',
             },
             {
-                title: 'Loop i: 0 -> n',
-                desc:
-                    'Initialises i to 0 and starts a loop.\nIncrements every loop iteration.\nEnds the loop when i is equal to n (size of the array) .',
-                blockType: 'loop',
-            },
-            {
                 blockType: 'end',
                 title: 'END',
                 desc: 'lock to be placed at the end of the flowchart.',
@@ -156,11 +274,6 @@ export const problems: IProblem[] = [
                 blockType: 'io',
                 blockID: 'display-y',
                 code: 'display y',
-            },
-            {
-                blockType: 'loop',
-                blockID: 'loop-i-0-n',
-                code: 'Loop i: 0 -> n',
             },
             {
                 blockType: 'end',
@@ -218,7 +331,7 @@ export const problems: IProblem[] = [
             '}',
             'else',
             'printno',
-            'end'
+            'end',
         ],
         placeHolderDetails: [
             { decision: false },
@@ -425,7 +538,7 @@ export const problems: IProblem[] = [
             },
             {
                 blockType: 'io',
-                title: 'String<-input',
+                title: 'String <- input',
                 desc:
                     'Takes input from user. Stores input in variable String. ',
             },
@@ -786,4 +899,109 @@ export const problems: IProblem[] = [
         cardData: [],
         footerIcons: [],
     },
+];
+
+export const levelData = [
+    [
+        {
+            desc: 'Intro',
+            num: 1,
+            locked: false,
+        },
+        {
+            desc: 'Input / Output',
+            num: 2,
+            locked: false,
+        },
+        {
+            desc: 'Conditionals',
+            num: 3,
+            locked: false,
+        },
+    ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: false,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: false,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: false,
+        },
+    ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: true,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: true,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: true,
+        },
+    ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: true,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: true,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: true,
+        },
+    ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: true,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: true,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: true,
+        },
+    ],
+    [
+        {
+            desc: 'Intro',
+            num: 4,
+            locked: true,
+        },
+        {
+            desc: 'Input / Output',
+            num: 5,
+            locked: true,
+        },
+        {
+            desc: 'Conditionals',
+            num: 6,
+            locked: true,
+        },
+    ],
 ];

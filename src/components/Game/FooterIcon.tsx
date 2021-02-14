@@ -5,8 +5,9 @@ import {
     StyleSheet,
     TouchableNativeFeedback,
     View,
+    Text,
 } from 'react-native';
-import { IBlockID } from '../../gameData';
+import { IBlockID, BlockID2Icon } from '../../gameData';
 import { Block, colors } from '../FlowChart/config';
 
 const { width: WIDTH } = Dimensions.get('screen');
@@ -31,24 +32,38 @@ const FooterIcon: React.FC<FooterProps> = ({
     code,
 }) => {
     const longPress = () => onCircleLongPress(blockType, blockID, code);
-
+    const { icon: Icon, name } = BlockID2Icon[blockID];
     return (
         <TouchableNativeFeedback onLongPress={longPress}>
             <View style={styles.padding}>
                 <LinearGradient
                     colors={colors[blockType]}
-                    style={styles.foot}
-                />
+                    style={styles.gradient}
+                >
+                    <Text style={styles.iconText}>
+                        <Icon
+                            // @ts-ignore
+                            name={name}
+                            size={24}
+                        />
+                    </Text>
+                </LinearGradient>
             </View>
         </TouchableNativeFeedback>
     );
 };
 
 const styles = StyleSheet.create({
-    foot: {
+    iconText: {
+        color: '#fff',
+        textAlign: 'center',
+    },
+    gradient: {
         width: ICON_SIZE,
         height: ICON_SIZE,
         borderRadius: ICON_SIZE / 2,
+        display: 'flex',
+        justifyContent: 'center',
     },
     padding: {
         display: 'flex',
