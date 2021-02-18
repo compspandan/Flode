@@ -1,65 +1,49 @@
 import React, { useState } from 'react';
-import {
-    Dimensions,
-    ScrollView,
-    StyleSheet,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../components/Level/Header';
 import LevelBox from '../components/Level/LevelBox';
 import LockedOverlay from '../components/Level/LockedOverlay';
-import { levelData } from '../gameData';
+import { problems } from '../gameData';
 import { NavProps } from '../ParamList';
-
-const { height } = Dimensions.get('screen');
 
 const Levels: React.FC<NavProps<'Levels'>> = ({ navigation }) => {
     const [visible, setVisible] = useState(false);
     const toggleOverlay = () => setVisible(!visible);
 
+    const renderItem = ({ item }) => {
+        const { locked, level, levelDesc } = item;
+        return (
+            <LevelBox
+                desc={levelDesc}
+                locked={locked}
+                navigate={navigation.navigate}
+                num={level}
+                toggleOverlay={toggleOverlay}
+            />
+        );
+    };
+
     return (
         <SafeAreaView>
             <Header goBack={navigation.goBack} />
-            <ScrollView style={styles.container}>
-                {levelData.map((data, dex) => (
-                    <View key={`level-row-${dex + 1}`} style={styles.row}>
-                        {data.map((level, dex) => (
-                            <TouchableOpacity
-                                activeOpacity={0.6}
-                                key={`level-${dex + 1}`}
-                                onPress={() => {
-                                    if (level.locked) {
-                                        toggleOverlay();
-                                    } else {
-                                        navigation.navigate('Game', {
-                                            level: level.num,
-                                        });
-                                    }
-                                }}
-                            >
-                                <LevelBox level={level} />
-                            </TouchableOpacity>
-                        ))}
-                    </View>
-                ))}
-            </ScrollView>
+            <FlatList
+                style={styles.grid}
+                data={problems}
+                renderItem={renderItem}
+                keyExtractor={(_, key) => `level-${key}`}
+                numColumns={3}
+                horizontal={false}
+                contentContainerStyle={{ alignItems: 'center' }}
+            />
             <LockedOverlay toggleOverlay={toggleOverlay} visible={visible} />
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#E5E5E5',
-        height: height * 0.9,
-    },
-    row: {
-        marginVertical: 15,
-        display: 'flex',
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
+    grid: {
+        marginTop: 20,
     },
 });
 
