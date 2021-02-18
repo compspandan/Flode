@@ -17,18 +17,10 @@ const Landing: React.FC<NavProps<'Landing'>> = ({ navigation }) => (
         <View style={styles.svg}>
             <Text style={styles.header}>Flode</Text>
         </View>
-        <Svg
-            height={HEIGHT / 3}
-            width={WIDTH}
-            style={styles.svg}
-        >
+        <Svg height={HEIGHT / 3} width={WIDTH} style={styles.svg}>
             <SvgXml xml={imagesvg} width="100%" height="100%" x={WIDTH / 2} />
         </Svg>
-        <Svg
-            height={HEIGHT / 2.6}
-            width={WIDTH}
-            style={styles.svg}
-        >
+        <Svg height={HEIGHT / 2.6} width={WIDTH} style={styles.svg}>
             <Ellipse
                 cx={WIDTH / 2}
                 cy={HEIGHT / 2}
@@ -38,16 +30,18 @@ const Landing: React.FC<NavProps<'Landing'>> = ({ navigation }) => (
             />
         </Svg>
         <TouchableOpacity
+            activeOpacity={0.6}
             style={styles.playButton}
             onPress={() => navigation.push('Levels')}
         >
-            <Text style={{ color: 'white' }}>Play</Text>
+            <Text style={styles.buttonText}>Play</Text>
         </TouchableOpacity>
         <TouchableOpacity
+            activeOpacity={0.6}
             style={styles.aboutButton}
             onPress={() => navigation.push('About')}
         >
-            <Text style={{ color: 'white' }}>About Us</Text>
+            <Text style={styles.buttonText}>About</Text>
         </TouchableOpacity>
     </View>
 );
@@ -90,6 +84,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#e94560',
+    },
+    buttonText: {
+        color: '#fff',
     },
 });
 export default Landing;

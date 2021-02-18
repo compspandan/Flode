@@ -44,7 +44,7 @@ const LockedOverlay: React.FC<LockedOverlayProps> = ({
                     onPress={toggleOverlay}
                 >
                     <Text style={[styles.centerText, styles.buttonText]}>
-                        Go Back
+                        Go back
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     title: {
         marginVertical: 10,
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: 35,
     },
     desc: {
         marginVertical: 10,
