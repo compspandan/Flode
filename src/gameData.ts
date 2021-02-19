@@ -1,11 +1,11 @@
-import { Block } from './components/FlowChart/config';
 import {
+    AntDesign,
+    Entypo,
+    Feather,
     MaterialCommunityIcons,
     MaterialIcons,
-    Feather,
-    Entypo,
-    AntDesign,
 } from '@expo/vector-icons';
+import { Block } from './components/FlowChart/config';
 
 export interface IBlockID {
     start: string;
@@ -184,9 +184,11 @@ interface IProblem {
     level: number;
     problemStatement: string;
     initBlocks: ICodeBlock[];
+    locked?: boolean;
     validation: string[];
     placeHolderDetails: IPlaceHolder[];
     desc?: string;
+    levelDesc: string;
     cardData: ICard[];
     footerIcons: IFooterIcon[];
 }
@@ -196,6 +198,7 @@ export const problems: IProblem[] = [
         level: 1,
         problemStatement: 'Find the square of a number.',
         desc: 'Find the square of a number using multiplication.',
+        levelDesc: 'Introduction',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '0x0' },
             {
@@ -285,6 +288,7 @@ export const problems: IProblem[] = [
     {
         level: 2,
         problemStatement: 'Check if number is a multiple of 4.',
+        levelDesc: 'Operations',
         desc: 'Using modulo operator find if a number is a multiple of 4',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '893' },
@@ -448,6 +452,7 @@ export const problems: IProblem[] = [
         level: 3,
         problemStatement:
             'Swap lowercase characters to uppercase and uppercase to lowercase.',
+        levelDesc: 'Conditionals',
         desc: 'Using loops and conditional statements try to swap characters.',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: 'kom' },
@@ -625,6 +630,7 @@ export const problems: IProblem[] = [
     {
         level: 4,
         problemStatement: 'Find the average of all elements in a list.',
+        levelDesc: 'Lists 1',
         desc: 'Use a loop control flow to access the ith element of a list.',
         initBlocks: [
             {
@@ -815,7 +821,9 @@ export const problems: IProblem[] = [
     },
     {
         level: 5,
-        problemStatement: 'Twins in a list(Consecutive repeating numbers).',
+        problemStatement: 'Twins in a list (Consecutive repeating numbers) .',
+        levelDesc: 'Lists 2',
+        locked: true,
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '111' },
             {
@@ -874,134 +882,13 @@ export const problems: IProblem[] = [
     },
     {
         level: 6,
-        problemStatement: 'Find the average of all elements in a list.',
-        placeHolderDetails: [],
+        problemStatement: 'Twins in a list (Consecutive repeating numbers) .',
+        levelDesc: 'Lists 2',
+        locked: true,
         initBlocks: [],
         validation: [],
+        placeHolderDetails: [],
         cardData: [],
         footerIcons: [],
     },
-    {
-        level: 7,
-        problemStatement: 'Add two numbers.',
-        placeHolderDetails: [],
-        initBlocks: [],
-        validation: [],
-        cardData: [],
-        footerIcons: [],
-    },
-    {
-        level: 8,
-        problemStatement: 'Check if number is a multiple of 4.',
-        placeHolderDetails: [],
-        initBlocks: [],
-        validation: [],
-        cardData: [],
-        footerIcons: [],
-    },
-];
-
-export const levelData = [
-    [
-        {
-            desc: 'Intro',
-            num: 1,
-            locked: false,
-        },
-        {
-            desc: 'Input / Output',
-            num: 2,
-            locked: false,
-        },
-        {
-            desc: 'Conditionals',
-            num: 3,
-            locked: false,
-        },
-    ],
-    [
-        {
-            desc: 'Intro',
-            num: 4,
-            locked: false,
-        },
-        {
-            desc: 'Input / Output',
-            num: 5,
-            locked: false,
-        },
-        {
-            desc: 'Conditionals',
-            num: 6,
-            locked: false,
-        },
-    ],
-    [
-        {
-            desc: 'Intro',
-            num: 4,
-            locked: true,
-        },
-        {
-            desc: 'Input / Output',
-            num: 5,
-            locked: true,
-        },
-        {
-            desc: 'Conditionals',
-            num: 6,
-            locked: true,
-        },
-    ],
-    [
-        {
-            desc: 'Intro',
-            num: 4,
-            locked: true,
-        },
-        {
-            desc: 'Input / Output',
-            num: 5,
-            locked: true,
-        },
-        {
-            desc: 'Conditionals',
-            num: 6,
-            locked: true,
-        },
-    ],
-    [
-        {
-            desc: 'Intro',
-            num: 4,
-            locked: true,
-        },
-        {
-            desc: 'Input / Output',
-            num: 5,
-            locked: true,
-        },
-        {
-            desc: 'Conditionals',
-            num: 6,
-            locked: true,
-        },
-    ],
-    [
-        {
-            desc: 'Intro',
-            num: 4,
-            locked: true,
-        },
-        {
-            desc: 'Input / Output',
-            num: 5,
-            locked: true,
-        },
-        {
-            desc: 'Conditionals',
-            num: 6,
-            locked: true,
-        },
-    ],
 ];
