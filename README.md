@@ -1,7 +1,7 @@
 # Flode
 
 ### Motivation
-Imagine students living in rural areas with poor internet connectivity or, students who do not have access to laptops but still want to learn programming. 
+Imagine students living in rural areas with poor internet connectivity, or students who do not have access to laptops but still want to learn programming. 
 There are no easy and accessible ways for individuals with a lack of laptop or personal computing devices to learn this essential skill.
 Unfortunately, introductory coding tutorials directly start teaching basic programming statements with not much effort given to logical thinking. 
 In reality, the fundamental way to crack any programming question is to develop adequate problem-solving skills rather than to learn syntax. 
