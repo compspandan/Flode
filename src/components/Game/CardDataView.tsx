@@ -16,7 +16,7 @@ const gradientColors = ['#0f0c29', '#302b63', '#24243e'];
 const CardDataView: React.FC<CardDataViewProps> = ({
     translateY,
     cardViewHeight,
-    cardData
+    cardData,
 }) => {
     return (
         <Animated.View style={{ transform: [{ translateY }] }}>

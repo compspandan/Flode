@@ -1,3 +1,10 @@
+import {
+    AntDesign,
+    Entypo,
+    Feather,
+    MaterialCommunityIcons,
+    MaterialIcons,
+} from '@expo/vector-icons';
 import { Block } from './components/FlowChart/config';
 
 export interface IBlockID {
@@ -33,6 +40,123 @@ export interface IBlockID {
     'y-x*x': string;
 }
 
+export const BlockID2Icon = {
+    start: {
+        icon: MaterialCommunityIcons,
+        name: 'adjust',
+    },
+    end: {
+        icon: MaterialCommunityIcons,
+        name: 'adjust',
+    },
+    'init-sum-0': {
+        icon: MaterialCommunityIcons,
+        name: 'equal',
+    },
+    'input-arr': {
+        icon: MaterialCommunityIcons,
+        name: 'code-array',
+    },
+    'loop-i-0-n': {
+        icon: Entypo,
+        name: 'loop',
+    },
+    'init-n-len-arr': {
+        icon: MaterialCommunityIcons,
+        name: 'equal',
+    },
+    'add-i-to-sum': {
+        icon: MaterialIcons,
+        name: 'add',
+    },
+    'display-sum': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    'divide-sum-by-n': {
+        icon: Feather,
+        name: 'divide',
+    },
+    'input-x': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-left',
+    },
+    'multiply-x': { icon: Feather, name: 'x' },
+    'print-x': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    '}': {
+        icon: MaterialCommunityIcons,
+        name: 'code-brackets',
+    },
+    '{': {
+        icon: MaterialCommunityIcons,
+        name: 'code-brackets',
+    },
+    'print-s': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    's[i]-lower': {
+        icon: MaterialCommunityIcons,
+        name: 'equal',
+    },
+    else: {
+        icon: AntDesign,
+        name: 'question',
+    },
+    's[i]-upper': {
+        icon: MaterialCommunityIcons,
+        name: 'equal',
+    },
+    'if-x.lower': {
+        icon: AntDesign,
+        name: 'question',
+    },
+    'input-s': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-left',
+    },
+    printno: {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    printyes: {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    'input-i': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-left',
+    },
+    'if-n%4': {
+        icon: AntDesign,
+        name: 'question',
+    },
+    'if-j-a[i]': {
+        icon: AntDesign,
+        name: 'question',
+    },
+    'print-j': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    'init-j': {
+        icon: MaterialCommunityIcons,
+        name: 'equal',
+    },
+    'display-y': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-right',
+    },
+    'input-n': {
+        icon: MaterialCommunityIcons,
+        name: 'arrow-left',
+    },
+    'y-x*x': { icon: Feather, name: 'x' },
+};
+
 export interface ICodeBlock {
     blockType: keyof Block;
     code: string;
@@ -60,9 +184,11 @@ interface IProblem {
     level: number;
     problemStatement: string;
     initBlocks: ICodeBlock[];
+    locked?: boolean;
     validation: string[];
     placeHolderDetails: IPlaceHolder[];
     desc?: string;
+    levelDesc: string;
     cardData: ICard[];
     footerIcons: IFooterIcon[];
 }
@@ -72,6 +198,7 @@ export const problems: IProblem[] = [
         level: 1,
         problemStatement: 'Find the square of a number.',
         desc: 'Find the square of a number using multiplication.',
+        levelDesc: 'Introduction',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '0x0' },
             {
@@ -125,12 +252,6 @@ export const problems: IProblem[] = [
                 blockType: 'io',
             },
             {
-                title: 'Loop i: 0 -> n',
-                desc:
-                    'Initialises i to 0 and starts a loop.\nIncrements every loop iteration.\nEnds the loop when i is equal to n (size of the array) .',
-                blockType: 'loop',
-            },
-            {
                 blockType: 'end',
                 title: 'END',
                 desc: 'lock to be placed at the end of the flowchart.',
@@ -158,11 +279,6 @@ export const problems: IProblem[] = [
                 code: 'display y',
             },
             {
-                blockType: 'loop',
-                blockID: 'loop-i-0-n',
-                code: 'Loop i: 0 -> n',
-            },
-            {
                 blockType: 'end',
                 blockID: 'end',
                 code: 'END',
@@ -172,6 +288,7 @@ export const problems: IProblem[] = [
     {
         level: 2,
         problemStatement: 'Check if number is a multiple of 4.',
+        levelDesc: 'Operations',
         desc: 'Using modulo operator find if a number is a multiple of 4',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '893' },
@@ -218,7 +335,7 @@ export const problems: IProblem[] = [
             '}',
             'else',
             'printno',
-            'end'
+            'end',
         ],
         placeHolderDetails: [
             { decision: false },
@@ -335,6 +452,7 @@ export const problems: IProblem[] = [
         level: 3,
         problemStatement:
             'Swap lowercase characters to uppercase and uppercase to lowercase.',
+        levelDesc: 'Conditionals',
         desc: 'Using loops and conditional statements try to swap characters.',
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: 'kom' },
@@ -425,7 +543,7 @@ export const problems: IProblem[] = [
             },
             {
                 blockType: 'io',
-                title: 'String<-input',
+                title: 'String <- input',
                 desc:
                     'Takes input from user. Stores input in variable String. ',
             },
@@ -512,6 +630,7 @@ export const problems: IProblem[] = [
     {
         level: 4,
         problemStatement: 'Find the average of all elements in a list.',
+        levelDesc: 'Lists 1',
         desc: 'Use a loop control flow to access the ith element of a list.',
         initBlocks: [
             {
@@ -702,7 +821,9 @@ export const problems: IProblem[] = [
     },
     {
         level: 5,
-        problemStatement: 'Twins in a list(Consecutive repeating numbers).',
+        problemStatement: 'Twins in a list (Consecutive repeating numbers) .',
+        levelDesc: 'Lists 2',
+        locked: true,
         initBlocks: [
             { blockType: 'start', code: 'START', blockID: 'start', uid: '111' },
             {
@@ -761,28 +882,12 @@ export const problems: IProblem[] = [
     },
     {
         level: 6,
-        problemStatement: 'Find the average of all elements in a list.',
-        placeHolderDetails: [],
+        problemStatement: 'Twins in a list (Consecutive repeating numbers) .',
+        levelDesc: 'Lists 2',
+        locked: true,
         initBlocks: [],
         validation: [],
-        cardData: [],
-        footerIcons: [],
-    },
-    {
-        level: 7,
-        problemStatement: 'Add two numbers.',
         placeHolderDetails: [],
-        initBlocks: [],
-        validation: [],
-        cardData: [],
-        footerIcons: [],
-    },
-    {
-        level: 8,
-        problemStatement: 'Check if number is a multiple of 4.',
-        placeHolderDetails: [],
-        initBlocks: [],
-        validation: [],
         cardData: [],
         footerIcons: [],
     },
